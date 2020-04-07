@@ -50,13 +50,18 @@ class MovieMap extends Component {
       (result, status) => {
         console.log(result);
         console.log(result.routes[0].overview_polyline);
-        if (status === window.google.maps.DirectionsService.OK) {
-          this.setState({
-            directions: result,
-            polyline: result.routes[0].overview_polyline,
-          });
+        if (status === 'OK') {
+          this.setState(
+            {
+              directions: result,
+              polyline: result.routes[0].overview_polyline,
+            },
+            () => {
+              console.log(result);
+            }
+          );
         } else {
-          console.dir(`error fetching directions ${this.state.directions}`);
+          console.dir(`error fetching directions ${result}`);
         }
       }
     );
@@ -81,7 +86,7 @@ class MovieMap extends Component {
             <DirectionsRenderer defaultDirections={this.state.directions} />
           )}
           {/* {this.state.polyline && <Polyline path={this.state.polyline} />} */}
-
+          {/* 
           <Polyline
             path={this.state.pathCoordinates}
             options={{
@@ -96,7 +101,7 @@ class MovieMap extends Component {
                 },
               ],
             }}
-          />
+          /> */}
         </GoogleMap>
       </div>
     );
