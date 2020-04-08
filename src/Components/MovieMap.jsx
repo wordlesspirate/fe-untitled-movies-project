@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   GoogleMap,
   withScriptjs,
@@ -6,7 +6,7 @@ import {
   Marker,
   DirectionsRenderer,
   Polyline,
-} from 'react-google-maps';
+} from "react-google-maps";
 
 class MovieMap extends Component {
   state = {
@@ -32,7 +32,7 @@ class MovieMap extends Component {
             lat: movieLocation.lat,
             lng: movieLocation.lng,
           }}
-          onClick={() => console.log('You clicked me!')}
+          onClick={() => console.log("You clicked me!")}
         />
       );
     });
@@ -48,17 +48,17 @@ class MovieMap extends Component {
         travelMode: window.google.maps.TravelMode.WALKING,
       },
       (result, status) => {
-        console.log(result);
-        console.log(result.routes[0].overview_polyline);
-        if (status === 'OK') {
+        // console.log(result);
+        // console.log(result.routes[0].overview_polyline);
+        if (status === "OK") {
           this.setState(
             {
               directions: result,
               polyline: result.routes[0].overview_polyline,
-            },
-            () => {
-              console.log(result);
             }
+            // () => {
+            //   console.log(result);
+            // }
           );
         } else {
           console.dir(`error fetching directions ${result}`);
@@ -77,9 +77,9 @@ class MovieMap extends Component {
           <Marker
             position={{ lat: 53.960192, lng: -1.092438 }}
             icon={{
-              url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
             }}
-            onClick={() => console.log('You clicked me!')}
+            onClick={() => console.log("You clicked me!")}
           />
           {this.displayMarkers()}
           {this.state.directions && (
