@@ -5,7 +5,7 @@ import {
   withGoogleMap,
   Marker,
   DirectionsRenderer,
-  Polyline,
+  // Polyline,
 } from "react-google-maps";
 
 class MovieMap extends Component {
