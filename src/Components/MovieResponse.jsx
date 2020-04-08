@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import getMovieLocations from '../Utils/movies';
-//import IMDbKey from '../movies_config';
+import LocationMarkers from './LocationMarkers';
 
 class MovieResponse extends Component {
+  state = {
+    address: '',
+  };
+
   componentDidMount() {
-    getMovieLocations().then((location) => {
-      console.log('response from api', location);
+    getMovieLocations().then((address) => {
+      this.setState({ address }, () => {
+        // console.log(this.state.address);
+      });
     });
   }
   render() {
     return (
       <div>
-        <h1>HELLO</h1>
+        <LocationMarkers address={this.state.address} />
       </div>
     );
   }

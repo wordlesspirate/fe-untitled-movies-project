@@ -22,7 +22,7 @@ class App extends Component {
           <MovieResponse />
           {/*<MovieMap /> */}
         </div>
-        <LocationMarkers />
+        {/* <LocationMarkers /> */}
       </>
     );
   }

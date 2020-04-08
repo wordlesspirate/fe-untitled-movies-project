@@ -12,8 +12,8 @@ const getMovieLocations = () => {
   )
     .then((response) => response.json())
     .then((response) => {
-      console.log('response in movies.js', response);
-      return response;
+      //console.log('response in movies.js', response.locations);
+      return response.locations[5].location;
     })
     .catch((err) => {
       console.log(err);

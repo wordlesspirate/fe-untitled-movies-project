@@ -5,21 +5,22 @@ import * as api from '../Utils/api';
 
 class LocationMarkers extends Component {
   state = {
-    address: '8 Stoney Street, Borough, London, England, UK',
+    address: '',
     location: null,
   };
 
   getLocation = () => {
     api.getLatLng(this.state.address).then((location) => {
-      // console.log(location);
+      console.log(location);
       this.setState({ location }, () => {
-        // console.log('find the error', this.state.location);
+        console.log('find the error', this.state.location);
       });
     });
   };
 
   componentDidMount() {
-    this.getLocation();
+    console.log(this.props);
+    // this.setState(({this.props.address}))
   }
 
   // componentDidUpdate(prevState) {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import APIKey from '../config';
 
 export const getLatLng = (address) => {
+  console.log(address);
   return axios
     .get(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${APIKey}`
