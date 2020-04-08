@@ -1,19 +1,19 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 // import * as MovieLocations from "../data/locations.json";
-import { Marker } from "react-google-maps";
-import * as api from "../Utils/api";
+import { Marker } from 'react-google-maps';
+import * as api from '../Utils/api';
 
 class LocationMarkers extends Component {
   state = {
-    address: "8 Stoney Street, Borough, London, England, UK",
+    address: '8 Stoney Street, Borough, London, England, UK',
     location: null,
   };
 
   getLocation = () => {
     api.getLatLng(this.state.address).then((location) => {
-      console.log(location);
+      // console.log(location);
       this.setState({ location }, () => {
-        console.log("find the error", this.state.location);
+        // console.log('find the error', this.state.location);
       });
     });
   };
@@ -35,14 +35,14 @@ class LocationMarkers extends Component {
           {/* {MovieLocations.locations.map((location) => {
             console.log(location);
           })} */}
-          {this.state.location && (
+          {/* {this.state.location && (
             <Marker
               position={{
                 lat: this.state.location.lat,
                 lng: this.state.location.lng,
               }}
             />
-          )}
+          )} */}
         </h1>
       </div>
     );

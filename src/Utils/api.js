@@ -1,5 +1,5 @@
-import axios from "axios";
-import APIKey from "../config";
+import axios from 'axios';
+import APIKey from '../config';
 
 export const getLatLng = (address) => {
   return axios
