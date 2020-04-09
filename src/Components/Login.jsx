@@ -15,10 +15,7 @@ class Login extends React.Component {
     event.preventDefault();
     try {
       const user = await Auth.signIn(this.state.username, this.state.password);
-      // this.props.auth.setAuthStatus(true);
-      // this.props.auth.setUser(user);
     } catch (error) {
-      console.dir(error);
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);
       this.setState({
