@@ -71,20 +71,21 @@ class MovieMap extends Component {
     return (
       <div>
         <GoogleMap
-          defaultZoom={11}
-          defaultCenter={{ lat: 53.960192, lng: -1.092438 }}
+          defaultZoom={6}
+          // defaultCenter={{ lat: 53.960192, lng: -1.092438 }}
+          defaultCenter={{ lat: 53.800739, lng: -1.549144 }}
         >
-          <Marker
-            position={{ lat: 53.960192, lng: -1.092438 }}
+          {/* <Marker
+            position={{ lat: 50.736129, lng: -1.988229 }}
             icon={{
               url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-            }}
-            onClick={() => console.log("You clicked me!")}
+            }} */}
+          onClick={() => console.log("You clicked me!")}
           />
           {this.displayMarkers()}
-          {this.state.directions && (
+          {/* {this.state.directions && (
             <DirectionsRenderer defaultDirections={this.state.directions} />
-          )}
+          )} */}
           {/* {this.state.polyline && <Polyline path={this.state.polyline} />} */}
           {/* 
           <Polyline

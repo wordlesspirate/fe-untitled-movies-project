@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import getMovieLocations from '../Utils/movies';
-import LocationMarkers from './LocationMarkers';
+import React, { Component } from "react";
+import { getMovieLocations } from "../Utils/movies";
+import LocationMarkers from "./LocationMarkers";
 
 class MovieResponse extends Component {
   state = {
-    address: '',
+    address: "Leeds",
   };
 
   componentDidMount() {
