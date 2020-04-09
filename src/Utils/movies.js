@@ -1,18 +1,18 @@
-import IMDbKey from "../movies_config";
-const { extractTitleId } = require("./moviemanipulation");
+import IMDbKey from '../movies_config';
+const { extractTitleId } = require('./moviemanipulation');
 
 export const getMovieId = (movieTitle) => {
   return fetch(`https://imdb8.p.rapidapi.com/title/find?q=${movieTitle}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "x-rapidapi-host": "imdb8.p.rapidapi.com",
-      "x-rapidapi-key": IMDbKey,
+      'x-rapidapi-host': 'imdb8.p.rapidapi.com',
+      'x-rapidapi-key': IMDbKey,
     },
   })
     .then((response) => response.json())
     .then((response) => {
-      console.log(response);
-      console.log(response.results[0].id);
+      // console.log(response);
+      // console.log(response.results[0].id);
 
       return extractTitleId(response.results[0].id);
     })
@@ -21,21 +21,25 @@ export const getMovieId = (movieTitle) => {
     });
 };
 
-export const getMovieLocations = () => {
+export const getMovieLocations = (movieId) => {
   return fetch(
-    "https://imdb8.p.rapidapi.com/title/get-filming-locations?tconst=tt0944947",
+    `https://imdb8.p.rapidapi.com/title/get-filming-locations?tconst=${movieId}`,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "x-rapidapi-host": "imdb8.p.rapidapi.com",
-        "x-rapidapi-key": IMDbKey,
+        'x-rapidapi-host': 'imdb8.p.rapidapi.com',
+        'x-rapidapi-key': IMDbKey,
       },
     }
   )
     .then((response) => response.json())
     .then((response) => {
-      //console.log('response in movies.js', response.locations);
-      return response.locations[5].location;
+      const addressArray = [];
+      response.locations.map((location) => {
+        addressArray.push(location.location);
+      });
+
+      return addressArray;
     })
     .catch((err) => {
       console.log(err);

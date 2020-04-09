@@ -1,30 +1,38 @@
-import React, { Component } from "react";
-import { getMovieId, getMovieLocations } from "../Utils/movies";
+import React, { Component } from 'react';
+import { getMovieId, getMovieLocations } from '../Utils/movies';
+import * as api from '../Utils/api';
 
 class SearchMovie extends Component {
-  state = { movie: "" };
+  state = { movieTitle: '', coordinates: [] };
 
   handleChange = (event) => {
     const { value } = event.target;
-    this.setState({ movie: value }, () => {
-      console.log(this.state.movie);
+    this.setState({ movieTitle: value }, () => {
+      //console.log(this.state.movieTitle);
     });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    getMovieId(this.state.movie).then((response) => {
-      console.log(response);
-      return response;
+
+    getMovieId(this.state.movieTitle).then((movieId) => {
+      getMovieLocations(movieId).then((addresses) => {
+        const coords = [];
+        addresses.forEach((address) => {
+          api.getLatLng(address).then((latLng) => {
+            coords.push(latLng);
+          });
+        });
+        //figure out how to deal with errors/empty coordinates
+        this.setState({ coordinates: coords }, () => {
+          console.log('>>>>', this.state.coordinates);
+        });
+      });
     });
-    //   getMovieLocations().then((address) => {
-    //    this.setState({ address }, () => {
-    //      console.log(this.state.address);
-    //    });
-    //  });
   };
 
   render() {
+    //if (this.state.coordinates) return <Newcomponentpassedwithprops />;
     return (
       <form onSubmit={this.handleSubmit}>
         <input
