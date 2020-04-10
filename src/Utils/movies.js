@@ -1,12 +1,12 @@
-import IMDbKey from '../movies_config';
-const { extractTitleId } = require('./moviemanipulation');
+import IMDbKey from "../movies_config";
+const { extractTitleId } = require("./moviemanipulation");
 
 export const getMovieId = (movieTitle) => {
   return fetch(`https://imdb8.p.rapidapi.com/title/find?q=${movieTitle}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'x-rapidapi-host': 'imdb8.p.rapidapi.com',
-      'x-rapidapi-key': IMDbKey,
+      "x-rapidapi-host": "imdb8.p.rapidapi.com",
+      "x-rapidapi-key": IMDbKey,
     },
   })
     .then((response) => response.json())
@@ -25,17 +25,17 @@ export const getMovieLocations = (movieId) => {
   return fetch(
     `https://imdb8.p.rapidapi.com/title/get-filming-locations?tconst=${movieId}`,
     {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'x-rapidapi-host': 'imdb8.p.rapidapi.com',
-        'x-rapidapi-key': IMDbKey,
+        "x-rapidapi-host": "imdb8.p.rapidapi.com",
+        "x-rapidapi-key": IMDbKey,
       },
     }
   )
     .then((response) => response.json())
     .then((response) => {
       const addressArray = [];
-      response.locations.map((location) => {
+      response.locations.forEach((location) => {
         addressArray.push(location.location);
       });
 
