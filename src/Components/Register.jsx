@@ -1,7 +1,7 @@
 import React from "react";
 import { Auth } from "aws-amplify";
 import axios from "axios";
-import config from "../config.json";
+import config from "../config";
 
 class Register extends React.Component {
   state = {
@@ -12,8 +12,6 @@ class Register extends React.Component {
     email: "",
     errors: {
       cognito: null,
-      blankfield: false,
-      passwordMatch: false,
     },
   };
   handleChange = (event) => {
@@ -33,6 +31,9 @@ class Register extends React.Component {
         password: password,
       };
       await axios.post(`${config.api.invokeURL}/users`, params);
+      console.log(
+        "Thanks for registering, check your email for verification link"
+      );
     } catch (err) {
       //ERROR HANDLING HERE
     }
@@ -55,6 +56,7 @@ class Register extends React.Component {
       });
     } catch (error) {
       let err = null;
+      console.dir(error);
       !error.message ? (err = { message: error }) : (err = error);
       this.setState({
         error: {
