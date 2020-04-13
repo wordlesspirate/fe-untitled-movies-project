@@ -49,7 +49,7 @@ class NewMovieMap extends Component {
         >
           {this.displayMarkers()}
         </GoogleMap>
-        <UserLocation />
+        <UserLocation coordinates={this.props.coordinates} />
       </div>
     );
   }

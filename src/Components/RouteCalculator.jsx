@@ -1,41 +1,65 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
-  Map,
-  GoogleApiWrapper,
+  GoogleMap,
   Marker,
   DirectionsService,
   DirectionsRenderer,
   LatLng,
-} from 'google-maps-react';
-import APIKey from '../config';
+} from "react-google-maps";
+import APIKey from "../config";
 
 class RouteCalculator extends Component {
   state = {
+    userLocation: null,
     directions: null,
   };
-  //   initMap() {
-  //     let directionsService = new google.maps.DirectionsService();
-  //     let directionsRenderer = new google.maps.DirectionsRenderer();
 
-  //     const start = new google.maps.LatLng(53.960192, -1.092438);
+  componentDidMount() {
+    this.setState({ userLocation: this.props.userLocation });
+  }
 
-  //     const map = new google.maps.Map();
-  //   }
+  componentDidUpdate(prevProps) {
+    console.log("one last try for the props!", this.props);
+    console.log("wheres my location at", this.props.movieLocations[0]);
+    if (this.props !== prevProps) {
+      console.log("!!!!!!!!!!!!!", this.props.movieLocations);
+      const DirectionsService = new window.google.maps.DirectionsService();
 
-  //  directionService = new google.maps.DirectionsService()
-  //  directionService.route({
-  //      origin
-  //  })
+      // DirectionsService.route(
+      //   {
+      //     origin: new window.google.maps.LatLng(
+      //       this.state.userLocation.lat,
+      //       this.state.userLocation.lng
+      //     ),
+      //     destination: new window.google.maps.LatLng(
+      //       this.props.movieLocations[1].lat,
+      //       this.props.movieLocations[1].lng
+      //     ),
+      //     travelMode: window.google.maps.TravelMode.WALKING,
+      //   },
+      //   (result, status) => {
+      //     // console.log(result);
+      //     // console.log(result.routes[0].overview_polyline);
+      //     if (status === "OK") {
+      //       this.setState(
+      //         {
+      //           directions: result,
+      //           polyline: result.routes[0].overview_polyline,
+      //         }
+      //         // () => {
+      //         //   console.log(result);
+      //         // }
+      //       );
+      //     } else {
+      //       console.dir(`error fetching directions ${result}`);
+      //     }
+      //   }
+      // );
+    }
+  }
 
   render() {
-    return (
-      <div>
-        <DirectionsService
-          origin={}
-          destination={(53.955755, -1.078316)}
-        ></DirectionsService>
-      </div>
-    );
+    return <div></div>;
   }
 }
 
