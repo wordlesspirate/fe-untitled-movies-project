@@ -16,6 +16,7 @@ import Login from "./Components/Login";
 import { Router, Link } from "@reach/router";
 import { Auth } from "aws-amplify";
 import Home from "./Components/Home";
+import Usercamera from "./Components/Usercamera";
 
 class App extends Component {
   state = {
@@ -59,6 +60,7 @@ class App extends Component {
             <Link to="/">Login</Link>
             <Link to="/register">Register</Link>
             <Link to="/home">Home</Link>
+            <Link to="/userCamera">Camera</Link>
           </nav>
           <Router>
             <Login auth={authProps} path="/" />
@@ -68,6 +70,7 @@ class App extends Component {
               path="/register"
             />
             <Home auth={authProps} path="home" />
+            <Usercamera auth={authProps} path="userCamera" />
           </Router>
           <div></div>
         </div>

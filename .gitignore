@@ -25,3 +25,4 @@ yarn-error.log*
 config.js
 movies_config.js
 config.json
+keys.json
