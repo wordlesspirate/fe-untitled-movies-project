@@ -5,6 +5,7 @@ import {
   withGoogleMap,
   Marker,
 } from "react-google-maps";
+import UserLocation from "./UserLocation";
 
 class NewMovieMap extends Component {
   displayMarkers = () => {
@@ -24,10 +25,7 @@ class NewMovieMap extends Component {
         <Marker
           key={index}
           id={index}
-          position={{
-            lat: coordinate.lat,
-            lng: coordinate.lng,
-          }}
+          position={{ lat: coordinate.lat, lng: coordinate.lng }}
           onClick={() => console.log("You clicked me!")}
         />
       );
@@ -51,6 +49,7 @@ class NewMovieMap extends Component {
         >
           {this.displayMarkers()}
         </GoogleMap>
+        <UserLocation />
       </div>
     );
   }

@@ -8,6 +8,7 @@ import React, { Component } from "react";
 // import LocationMarkers from "./Components/LocationMarkers";
 import MovieResponse from "./Components/MovieResponse";
 import Dashboard from "./Components/Dashboard";
+// import UserLocation from "./Components/UserLocation";
 
 // import MovieMap from "./Components/MovieMap";
 // import Register from "./Components/Register";
