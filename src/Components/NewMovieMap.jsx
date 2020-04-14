@@ -1,13 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
   Marker,
-} from 'react-google-maps';
-import UserLocation from './UserLocation';
-
+  InfoWindow,
+} from "react-google-maps";
+import UserLocation from "./UserLocation";
+import * as api from "../Utils/api";
 class NewMovieMap extends Component {
+  state = { coordinate: null, address: null };
+
+  fetchAddress = (coordinate) => {
+    api.getAddress(coordinate).then((address) => {
+      this.setState({ address });
+    });
+  };
+
   displayMarkers = () => {
     // return (
     //   <Marker
@@ -25,7 +34,9 @@ class NewMovieMap extends Component {
           key={index}
           id={index}
           position={{ lat: coordinate.lat, lng: coordinate.lng }}
-          onClick={() => console.log('You clicked me!')}
+          onClick={() =>
+            this.setState({ coordinate }, this.fetchAddress(coordinate))
+          }
         />
       );
     });
@@ -46,6 +57,20 @@ class NewMovieMap extends Component {
           defaultCenter={{ lat: 53.800739, lng: -1.549144 }}
         >
           {this.displayMarkers()}
+          {this.state.coordinate && (
+            <InfoWindow
+              position={{
+                lat: this.state.coordinate.lat,
+                lng: this.state.coordinate.lng,
+              }}
+              onCloseClick={() => this.setState({ coordinate: null })}
+            >
+              <p>
+                Once we figure it out, addresses and other relevant info goes
+                here!
+              </p>
+            </InfoWindow>
+          )}
         </GoogleMap>
         <UserLocation coordinates={this.props.coordinates} />
       </div>
