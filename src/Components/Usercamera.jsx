@@ -12,13 +12,13 @@ class Usercamera extends Component {
 
   handleTakePhoto = (dataUri) => {
     const username = this.props.auth.user.username;
-    const filename = `${Math.floor(
-      Math.random() * 10000000000
-    ).toString()}.json`;
+    const filename = `${Math.floor(Math.random() * 10000000000).toString()}`;
     const config = { ...keys.aws, dirName: username };
+
     const file = new File([dataUri], filename, {
-      type: ".json",
+      type: ".jpg",
     });
+
     ReactS3.uploadFile(file, config)
       .then((data) => {
         console.log("done it");
