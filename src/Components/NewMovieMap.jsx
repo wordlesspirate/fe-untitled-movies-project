@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
   Marker,
-} from "react-google-maps";
-import UserLocation from "./UserLocation";
+} from 'react-google-maps';
+import UserLocation from './UserLocation';
 
 class NewMovieMap extends Component {
   displayMarkers = () => {
@@ -20,19 +20,17 @@ class NewMovieMap extends Component {
     // console.log("from display markers >>>>", this.props.coordinates);
 
     return this.props.coordinates.map((coordinate, index) => {
-      console.log(coordinate.coords);
       return (
         <Marker
           key={index}
           id={index}
           position={{ lat: coordinate.lat, lng: coordinate.lng }}
-          onClick={() => console.log("You clicked me!")}
+          onClick={() => console.log('You clicked me!')}
         />
       );
     });
   };
   componentDidMount() {
-    // console.log(this);
     this.displayMarkers();
   }
 
