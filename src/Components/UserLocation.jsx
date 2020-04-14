@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Marker } from "react-google-maps";
-import RouteCalculator from "./RouteCalculator";
+import React, { Component } from 'react';
+import { Marker } from 'react-google-maps';
+import RouteCalculator from './RouteCalculator';
 
 class UserLocation extends Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class UserLocation extends Component {
   // {lat: 53.801863, lng: -1.559748}
 
   componentDidMount() {
-    console.log(">>>>", this.props);
+    // console.log(">>>>", this.props);
     // Check if geolocation is avaliable - allow or block location
     // if ("geolocation" in navigator) {
     //   console.log("Available");

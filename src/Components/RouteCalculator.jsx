@@ -15,13 +15,21 @@ class RouteCalculator extends Component {
   };
 
   componentDidMount() {
-    this.setState({ userLocation: this.props.userLocation });
+    this.setState({ userLocation: this.props.userLocation }, () => {
+      console.log(this.state.userLocation);
+    });
   }
 
-  componentDidUpdate(prevProps) {
-    console.log('wheres my location at', this.props.movieLocations[0]);
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.userLocation !== this.state.userLocation) {
+      this.setState({ userLocation: this.props.userLocation }, () => {
+        console.log(this.state.userLocation);
+      });
+    }
     if (this.props.movieLocations !== prevProps.movieLocations) {
+      console.log('wheres my location at', this.props.movieLocations[0].lat);
       console.log('!!!!!!!!!!!!!', this.props.movieLocations);
+      console.log('UserLoc', this.props.userLocation);
       const DirectionsService = new window.google.maps.DirectionsService();
 
       DirectionsService.route(
@@ -30,10 +38,7 @@ class RouteCalculator extends Component {
             this.state.userLocation.lat,
             this.state.userLocation.lng
           ),
-          destination: new window.google.maps.LatLng(
-            this.props.movieLocations[0].lat,
-            this.props.movieLocations[0].lng
-          ),
+          destination: new window.google.maps.LatLng(51.8806088, -0.4169725),
           travelMode: 'DRIVING',
         },
         (result, status) => {
