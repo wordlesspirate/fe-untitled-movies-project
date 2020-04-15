@@ -22,6 +22,7 @@
 //     this.setState({ [key]: value });
 //   };
 
+
 //   addUser = async (username, email, password, name) => {
 //     const id = Math.floor(Math.random() * 10000000000).toString();
 //     try {
@@ -37,6 +38,41 @@
 //       //ERROR HANDLING HERE
 //     }
 //   };
+
+  addUser = async (username, email, password, name) => {
+    const id = Math.floor(Math.random() * 10000000000).toString();
+    try {
+      const params = {
+        id: id,
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+      };
+      await axios.post(`${config.api.invokeURL}/users`, params);
+    } catch (err) {
+      //ERROR HANDLING HERE
+      console.log(err);
+      console.log(`Unable to create user ${err}`);
+    }
+  };
+  addProfile = async (username) => {
+    const profile_id = Math.floor(Math.random() * 10000).toString();
+
+    try {
+      const params = {
+        profile_id: profile_id,
+        username: username,
+      };
+      await axios.post(`${config.api.invokeURL}/profile/`, params);
+    } catch (err) {
+      //ERROR HANLDER
+      console.dir(err);
+      console.log(err);
+      console.log(`Unable to create profile ${err}`);
+    }
+  };
+
 
 //   handleSubmit = async (event) => {
 //     event.preventDefault();
@@ -64,6 +100,31 @@
 //       });
 //     }
 //   };
+
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        name,
+        attributes: {
+          email: email,
+        },
+      }).then(() => {
+        this.addUser(username, email, password, name);
+        this.addProfile(username);
+      });
+    } catch (error) {
+      let err = null;
+      !error.message ? (err = { message: error }) : (err = error);
+      this.setState({
+        error: {
+          ...this.state.errors,
+          cognito: err,
+        },
+      });
+    }
+  };
+
 
 //   render() {
 //     return (
