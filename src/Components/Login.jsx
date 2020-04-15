@@ -11,10 +11,11 @@ class Login extends React.Component {
     const info = event.target.value;
     this.setState({ [key]: info });
   };
+
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const user = await Auth.signIn(this.state.username, this.state.password);
+      await Auth.signIn(this.state.username, this.state.password);
     } catch (error) {
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);
@@ -51,6 +52,7 @@ class Login extends React.Component {
             ></input>
           </label>
           <br />
+
           <button type="submit">Login</button>
         </form>
       </div>

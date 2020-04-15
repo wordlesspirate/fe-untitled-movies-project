@@ -35,6 +35,24 @@ class Register extends React.Component {
       await axios.post(`${config.api.invokeURL}/users`, params);
     } catch (err) {
       //ERROR HANDLING HERE
+      console.log(err);
+      console.log(`Unable to create user ${err}`);
+    }
+  };
+  addProfile = async (username) => {
+    const profile_id = Math.floor(Math.random() * 10000).toString();
+
+    try {
+      const params = {
+        profile_id: profile_id,
+        username: username,
+      };
+      await axios.post(`${config.api.invokeURL}/profile/`, params);
+    } catch (err) {
+      //ERROR HANLDER
+      console.dir(err);
+      console.log(err);
+      console.log(`Unable to create profile ${err}`);
     }
   };
 
@@ -43,15 +61,16 @@ class Register extends React.Component {
     const { username, email, password, name } = this.state;
 
     try {
-      const signUpResponse = await Auth.signUp({
+      await Auth.signUp({
         username,
         password,
         name,
         attributes: {
           email: email,
         },
-      }).then((data) => {
+      }).then(() => {
         this.addUser(username, email, password, name);
+        this.addProfile(username);
       });
     } catch (error) {
       let err = null;
