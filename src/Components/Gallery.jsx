@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import ImageCard from "./ImageCard";
 const aws = require("aws-sdk");
-const config = require("../keys.json");
+//const config = require("../keys.json");
+const config = require("../config.json");
 
 class Gallery extends Component {
   state = {
@@ -20,7 +21,7 @@ class Gallery extends Component {
       const userFolder = `${this.props.auth.user.username}/`;
       const s3 = new aws.S3();
 
-      const response = await s3
+      await s3
         .listObjectsV2({
           Bucket: "movieapp-users-images",
           Prefix: userFolder,
@@ -41,7 +42,7 @@ class Gallery extends Component {
   render() {
     if (this.state.isLoading) return "Loading ....";
     if (!this.state.isLoading) {
-      const pic = this.state.userPics.Key;
+      //const pic = this.state.userPics.Key;
       return (
         <ul>
           {this.state.userPics.map((item) => {

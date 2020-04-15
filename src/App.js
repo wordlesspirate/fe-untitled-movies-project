@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import SimpleReactLightbox from "simple-react-lightbox";
+// import SimpleReactLightbox from "simple-react-lightbox";
 import Dashboard from "./Components/Dashboard";
 import Home from "./Components/Home";
 import Register from "./Components/Register";
@@ -31,7 +31,7 @@ class App extends Component {
 
   async componentDidMount() {
     try {
-      const session = await Auth.currentSession();
+      await Auth.currentSession();
       this.setAuthStatus(true);
       const user = await Auth.currentAuthenticatedUser();
       this.setUser(user);
