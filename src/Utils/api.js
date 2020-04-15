@@ -1,5 +1,5 @@
-import axios from "axios";
-import APIKey from "../config";
+import axios from 'axios';
+import APIKey from '../config';
 
 export const getLatLng = (address) => {
   return axios
@@ -12,14 +12,12 @@ export const getLatLng = (address) => {
 };
 
 export const getAddress = (coordinate) => {
-  console.log("this is coordinate >>>>", coordinate.lat);
-
   return axios
     .get(
       `https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinate.lat}, ${coordinate.lng}
       &key=${APIKey}`
     )
     .then(({ data: { results } }) => {
-      console.log("this is address >>>>", results);
+      return results[0].formatted_address;
     });
 };

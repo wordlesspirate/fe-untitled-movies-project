@@ -58,6 +58,7 @@ class UserLocation extends Component {
         <RouteCalculator
           userLocation={this.state}
           movieLocations={this.props.coordinates}
+          destination={this.props.destination}
         />
         ;
       </div>

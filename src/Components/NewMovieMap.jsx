@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
   Marker,
   InfoWindow,
-} from "react-google-maps";
-import UserLocation from "./UserLocation";
-import * as api from "../Utils/api";
+} from 'react-google-maps';
+import UserLocation from './UserLocation';
+import * as api from '../Utils/api';
 class NewMovieMap extends Component {
-  state = { coordinate: null, address: null };
+  state = { coordinate: null, address: null, destination: null, stops: [] };
 
   fetchAddress = (coordinate) => {
     api.getAddress(coordinate).then((address) => {
@@ -17,17 +17,22 @@ class NewMovieMap extends Component {
     });
   };
 
-  displayMarkers = () => {
-    // return (
-    //   <Marker
-    //     position={{
-    //       lat: 40.7127753,
-    //       lng: -74.0059728,
-    //     }}
-    //   />
-    //);
-    // console.log("from display markers >>>>", this.props.coordinates);
+  addDestination = (event) => {
+    event.preventDefault();
+    this.setState({ destination: this.state.coordinate });
+    //console.log('state coordinates', this.state.coordinate);
+  };
 
+  addStop = (event) => {
+    event.preventDefault();
+    // const stopsArray = [];
+    // stopsArray.push(this.state.coordinate);
+    this.setState({ stops: this.state.coordinate, ...this.state.stops }, () => {
+      console.log(this.state.stops);
+    });
+  };
+
+  displayMarkers = () => {
     return this.props.coordinates.map((coordinate, index) => {
       return (
         <Marker
@@ -65,14 +70,24 @@ class NewMovieMap extends Component {
               }}
               onCloseClick={() => this.setState({ coordinate: null })}
             >
-              <p>
-                Once we figure it out, addresses and other relevant info goes
-                here!
-              </p>
+              <>
+                <p>{this.state.address}</p>
+                {!this.state.destination && (
+                  <button onClick={this.addDestination}>
+                    Select Destination
+                  </button>
+                )}
+                {this.state.destination && (
+                  <button onClick={this.addStop}>Add Stop</button>
+                )}
+              </>
             </InfoWindow>
           )}
         </GoogleMap>
-        <UserLocation coordinates={this.props.coordinates} />
+        <UserLocation
+          coordinates={this.props.coordinates}
+          destination={this.state.destination}
+        />
       </div>
     );
   }

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   // GoogleMap,
   // Marker,
   // DirectionsService,
   DirectionsRenderer,
   // LatLng,
-} from "react-google-maps";
+} from 'react-google-maps';
 // import APIKey from "../config";
 
 class RouteCalculator extends Component {
@@ -15,21 +15,14 @@ class RouteCalculator extends Component {
   };
 
   componentDidMount() {
-    this.setState({ userLocation: this.props.userLocation }, () => {
-      console.log(this.state.userLocation);
-    });
+    this.setState({ userLocation: this.props.userLocation });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.userLocation !== this.state.userLocation) {
-      this.setState({ userLocation: this.props.userLocation }, () => {
-        console.log(this.state.userLocation);
-      });
+      this.setState({ userLocation: this.props.userLocation });
     }
-    if (this.props.movieLocations !== prevProps.movieLocations) {
-      // console.log("wheres my location at", this.props.movieLocations[0].lat);
-      // console.log("!!!!!!!!!!!!!", this.props.movieLocations);
-      // console.log("UserLoc", this.props.userLocation);
+    if (this.props.destination !== prevProps.destination) {
       const DirectionsService = new window.google.maps.DirectionsService();
 
       DirectionsService.route(
@@ -38,14 +31,16 @@ class RouteCalculator extends Component {
             this.state.userLocation.lat,
             this.state.userLocation.lng
           ),
-          destination: new window.google.maps.LatLng(51.8806088, -0.4169725),
-          travelMode: "DRIVING",
+          destination: new window.google.maps.LatLng(
+            this.props.destination.lat,
+            this.props.destination.lng
+          ),
+          travelMode: 'DRIVING',
         },
         (result, status) => {
-          console.log("this is result", result);
           // console.log("this is steps", result.routes[0].legs[0].steps);
-          //console.log(result.routes[0].overview_polyline);
-          if (status === "OK") {
+
+          if (status === 'OK') {
             this.setState(
               {
                 directions: result,
@@ -56,7 +51,7 @@ class RouteCalculator extends Component {
               // }
             );
           } else {
-            console.dir("console.dir", result);
+            console.dir('console.dir', result);
           }
         }
       );
@@ -66,10 +61,10 @@ class RouteCalculator extends Component {
   render() {
     return (
       <div>
-        {" "}
+        {' '}
         {this.state.directions && (
           <DirectionsRenderer defaultDirections={this.state.directions} />
-        )}{" "}
+        )}{' '}
       </div>
     );
   }
