@@ -1,10 +1,8 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.profile-avatar {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 5px 5px 5px 5px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
