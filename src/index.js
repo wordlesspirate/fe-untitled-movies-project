@@ -2,9 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+
+import Amplify from "aws-amplify";
+import config from "./config";
+import * as serviceWorker from "./serviceWorker";
+import SimpleReactLightbox from "simple-react-lightbox";
+
 // import Amplify from "aws-amplify";
 // import config from "./config";
 // import * as serviceWorker from "./serviceWorker";
+
 
 // Amplify.configure({
 //   Auth: {
@@ -15,5 +22,15 @@ import App from "./App";
 //   },
 // });
 
+
+ReactDOM.render(
+  <SimpleReactLightbox>
+    <App />
+  </SimpleReactLightbox>,
+  document.getElementById("root")
+);
+serviceWorker.unregister();
+
 ReactDOM.render(<App />, document.getElementById("root"));
 // serviceWorker.unregister();
+

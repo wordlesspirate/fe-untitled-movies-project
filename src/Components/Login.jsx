@@ -16,7 +16,13 @@ class Login extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
+
+      const user = await Auth.signIn(this.state.username, this.state.password);
+      this.props.auth.setAuthenticated(true);
+      this.props.auth.userInfo(user);
+
       await Auth.signIn(this.state.username, this.state.password);
+
     } catch (error) {
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);

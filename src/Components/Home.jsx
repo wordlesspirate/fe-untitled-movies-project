@@ -5,6 +5,9 @@ import { Link } from "@reach/router";
 
 class Home extends Component {
   render() {
+
+    return <div> WELCOME {this.props.auth.user.username}</div>;
+
     return (
       <main>
         WELCOME
@@ -15,6 +18,7 @@ class Home extends Component {
         </div>
       </main>
     );
+
   }
 }
 

@@ -1,3 +1,26 @@
+
+import React from "react";
+import { Auth } from "aws-amplify";
+import axios from "axios";
+import config from "../config";
+
+class Register extends React.Component {
+  state = {
+    username: "",
+    name: "",
+    password: "",
+    confirmpassword: "",
+    email: "",
+    errors: {
+      cognito: null,
+    },
+  };
+  handleChange = (event) => {
+    const key = event.target.name;
+    const value = event.target.value;
+    this.setState({ [key]: value });
+  };
+
 // import React from "react";
 // import { Auth } from "aws-amplify";
 // import axios from "axios";
@@ -39,6 +62,7 @@
 //     }
 //   };
 
+
   addUser = async (username, email, password, name) => {
     const id = Math.floor(Math.random() * 10000000000).toString();
     try {
@@ -50,6 +74,9 @@
         password: password,
       };
       await axios.post(`${config.api.invokeURL}/users`, params);
+      console.log(
+        "Thanks for registering, check your email for verification link"
+      );
     } catch (err) {
       //ERROR HANDLING HERE
       console.log(err);
@@ -115,6 +142,7 @@
       });
     } catch (error) {
       let err = null;
+      console.dir(error);
       !error.message ? (err = { message: error }) : (err = error);
       this.setState({
         error: {
