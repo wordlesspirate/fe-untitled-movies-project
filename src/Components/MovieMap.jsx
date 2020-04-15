@@ -4,9 +4,10 @@ import {
   withScriptjs,
   withGoogleMap,
   Marker,
-  DirectionsRenderer,
+  // DirectionsRenderer,
   // Polyline,
 } from "react-google-maps";
+import SearchMovie from "./SearchMovie";
 
 class MovieMap extends Component {
   state = {
@@ -70,6 +71,7 @@ class MovieMap extends Component {
   render() {
     return (
       <div>
+        {/* <SearchMovie /> */}
         <GoogleMap
           defaultZoom={6}
           // defaultCenter={{ lat: 53.960192, lng: -1.092438 }}
@@ -80,9 +82,9 @@ class MovieMap extends Component {
             icon={{
               url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
             }} */}
-          onClick={() => console.log("You clicked me!")}
-          />
-          {this.displayMarkers()}
+          {/* onClick={() => console.log("You clicked me!")}
+          /> */}
+          {/* {this.displayMarkers()} */}
           {/* {this.state.directions && (
             <DirectionsRenderer defaultDirections={this.state.directions} />
           )} */}
