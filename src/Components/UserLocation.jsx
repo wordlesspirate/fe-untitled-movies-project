@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { Marker } from 'react-google-maps';
-import RouteCalculator from './RouteCalculator';
+import React, { Component } from "react";
+import { Marker } from "react-google-maps";
+import RouteCalculator from "./RouteCalculator";
 
 class UserLocation extends Component {
   constructor(props) {
@@ -59,6 +59,7 @@ class UserLocation extends Component {
           userLocation={this.state}
           movieLocations={this.props.coordinates}
           destination={this.props.destination}
+          stops={this.props.stops}
         />
         ;
       </div>

@@ -1,4 +1,4 @@
-import IMDbKey from "./movies_config";
+import { IMDbKey } from "../config";
 const { extractTitleId } = require("./moviemanipulation");
 
 export const getMovieId = (movieTitle) => {

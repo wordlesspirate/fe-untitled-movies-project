@@ -3,7 +3,7 @@ import { getMovieId, getMovieLocations } from "../Utils/movies";
 import * as api from "../Utils/api";
 // import DisplayMarkers from "./DisplayMarkers";
 import NewWrappedMap from "./NewMovieMap";
-import APIKey from "../config.js";
+import { APIKey } from "../config.js";
 
 class SearchMovie extends Component {
   state = {
