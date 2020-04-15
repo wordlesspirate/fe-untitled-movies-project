@@ -20,30 +20,22 @@ class Usercamera extends Component {
     });
 
     ReactS3.uploadFile(file, config)
-      .then((data) => {
-        console.log("done it");
-      })
+      .then((data) => {})
       .catch((err) => {
         alert(err);
       });
     this.setState({ picData: dataUri });
   };
 
-  handleTakePhotoAnimationDone = (dataUri) => {
-    console.log("takePhoto");
-  };
+  handleTakePhotoAnimationDone = (dataUri) => {};
 
   handleCameraError = (error) => {
-    console.log("handleCameraError", error);
+    console.log(error);
   };
 
-  handleCameraStart = (stream) => {
-    console.log("handleCameraStart");
-  };
+  handleCameraStart = (stream) => {};
 
-  handleCameraStop = () => {
-    console.log("handleCameraStop");
-  };
+  handleCameraStop = () => {};
 
   render() {
     return (

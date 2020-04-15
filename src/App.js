@@ -8,7 +8,7 @@ import "./App.css";
 // import LocationMarkers from "./Components/LocationMarkers";
 // import MovieResponse from "./Components/MovieResponse";
 // import Dashboard from "./Components/Dashboard";
-
+import SimpleReactLightbox from "simple-react-lightbox";
 // import MovieMap from "./Components/MovieMap";
 import Register from "./Components/Register";
 // import Welcome from "./Components/Welcome";
@@ -53,7 +53,7 @@ class App extends Component {
       setAuthenticated: this.setAuthStatus,
       userInfo: this.setUser,
     };
-
+    console.log(SimpleReactLightbox);
     return (
       !this.state.isAuthenticating && (
         <div>

@@ -5,6 +5,7 @@ import App from "./App";
 import Amplify from "aws-amplify";
 import config from "./config";
 import * as serviceWorker from "./serviceWorker";
+import SimpleReactLightbox from "simple-react-lightbox";
 
 Amplify.configure({
   Auth: {
@@ -15,5 +16,10 @@ Amplify.configure({
   },
 });
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <SimpleReactLightbox>
+    <App />
+  </SimpleReactLightbox>,
+  document.getElementById("root")
+);
 serviceWorker.unregister();

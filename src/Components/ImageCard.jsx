@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import aws from "aws-sdk";
+import { SRLWrapper } from "simple-react-lightbox";
 
 class ImageCard extends Component {
   state = {
@@ -17,7 +18,6 @@ class ImageCard extends Component {
     s3.getObject(params)
       .promise()
       .then((response) => {
-        console.log(response.Body.toString());
         this.setState({ isLoading: false, img: response.Body.toString() });
       })
       .catch((err) => {
@@ -36,7 +36,9 @@ class ImageCard extends Component {
       image.src = this.state.img;
       return (
         <div>
-          <img src={`${image.src}`} style={{ width: "30%" }} />
+          <SRLWrapper>
+            <img src={`${image.src}`} style={{ width: "30%" }} />
+          </SRLWrapper>
         </div>
       );
     }
