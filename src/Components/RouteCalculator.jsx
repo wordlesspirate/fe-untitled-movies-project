@@ -1,39 +1,70 @@
 import React, { Component } from 'react';
 import {
-  Map,
-  GoogleApiWrapper,
-  Marker,
-  DirectionsService,
+  // GoogleMap,
+  // Marker,
+  // DirectionsService,
   DirectionsRenderer,
-  LatLng,
-} from 'google-maps-react';
-import APIKey from '../config';
+  // LatLng,
+} from 'react-google-maps';
+// import APIKey from "../config";
 
 class RouteCalculator extends Component {
   state = {
+    userLocation: null,
     directions: null,
   };
-  //   initMap() {
-  //     let directionsService = new google.maps.DirectionsService();
-  //     let directionsRenderer = new google.maps.DirectionsRenderer();
 
-  //     const start = new google.maps.LatLng(53.960192, -1.092438);
+  componentDidMount() {
+    this.setState({ userLocation: this.props.userLocation });
+  }
 
-  //     const map = new google.maps.Map();
-  //   }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.userLocation !== this.state.userLocation) {
+      this.setState({ userLocation: this.props.userLocation });
+    }
+    if (this.props.destination !== prevProps.destination) {
+      const DirectionsService = new window.google.maps.DirectionsService();
 
-  //  directionService = new google.maps.DirectionsService()
-  //  directionService.route({
-  //      origin
-  //  })
+      DirectionsService.route(
+        {
+          origin: new window.google.maps.LatLng(
+            this.state.userLocation.lat,
+            this.state.userLocation.lng
+          ),
+          destination: new window.google.maps.LatLng(
+            this.props.destination.lat,
+            this.props.destination.lng
+          ),
+          travelMode: 'DRIVING',
+        },
+        (result, status) => {
+          // console.log("this is steps", result.routes[0].legs[0].steps);
+
+          if (status === 'OK') {
+            this.setState(
+              {
+                directions: result,
+                polyline: result.routes[0].overview_polyline,
+              }
+              // () => {
+              //   console.log(result);
+              // }
+            );
+          } else {
+            console.dir('console.dir', result);
+          }
+        }
+      );
+    }
+  }
 
   render() {
     return (
       <div>
-        <DirectionsService
-          origin={}
-          destination={(53.955755, -1.078316)}
-        ></DirectionsService>
+        {' '}
+        {this.state.directions && (
+          <DirectionsRenderer defaultDirections={this.state.directions} />
+        )}{' '}
       </div>
     );
   }

@@ -35,7 +35,7 @@ export const getMovieLocations = (movieId) => {
     .then((response) => response.json())
     .then((response) => {
       const addressArray = [];
-      response.locations.map((location) => {
+      response.locations.forEach((location) => {
         addressArray.push(location.location);
       });
 
