@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { getMovieId, getMovieLocations } from '../Utils/movies';
-import * as api from '../Utils/api';
+import React, { Component } from "react";
+import { getMovieId, getMovieLocations } from "../Utils/movies";
+import * as api from "../Utils/api";
 // import DisplayMarkers from "./DisplayMarkers";
-import NewWrappedMap from './NewMovieMap';
-import APIKey from '../config';
+import NewWrappedMap from "./NewMovieMap";
+import { APIKey } from "../config.js";
 
 class SearchMovie extends Component {
   state = {
-    movieTitle: '',
+    movieTitle: "",
     coordinates: [],
   };
 
@@ -56,12 +56,12 @@ class SearchMovie extends Component {
           <button id="movie-search">Search Movie</button>
         </form>
         {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
-        <div style={{ width: '75%', height: '100vh' }}>
+        <div style={{ width: "75%", height: "100vh" }}>
           <NewWrappedMap
             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${APIKey}`}
-            loadingElement={<div style={{ height: '100' }} />}
-            containerElement={<div style={{ height: '100%' }} />}
-            mapElement={<div style={{ height: '100%' }} />}
+            loadingElement={<div style={{ height: "100" }} />}
+            containerElement={<div style={{ height: "100%" }} />}
+            mapElement={<div style={{ height: "100%" }} />}
             coordinates={this.state.coordinates}
           />
         </div>

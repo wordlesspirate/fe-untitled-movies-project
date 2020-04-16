@@ -7,7 +7,11 @@ class Picture extends Component {
     return (
       <div>
         <p>IMAGE SAVED TO S3</p>
-        <img src={`${image.src}`} style={{ width: "30%" }} />
+        <img
+          alt={"user-images"}
+          src={`${image.src}`}
+          style={{ width: "30%" }}
+        />
       </div>
     );
   }

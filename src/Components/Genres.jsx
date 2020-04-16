@@ -51,20 +51,20 @@ class Genres extends React.Component {
 
       console.log(this.num, "end");
       console.log(this.selectedGenres, "selectedGenre Array");
-    console.log(this.selectedGenres, "array outside if");
+      console.log(this.selectedGenres, "array outside if");
 
-    // if (i === 0) {
-    //   this.setState({ genre1: genre, g1_avatar: avatar, i: 1 });
-    // }
-    // if (i === 1) {
-    //   this.setState({ genre2: genre, g2_avatar: avatar, i: 2 });
-    // }
-    // if (i === 2) {
-    //   this.setState({ genre3: genre, g3_avatar: avatar, i: 0 });
-    //   this.updateProfile();
-    // }
+      // if (i === 0) {
+      //   this.setState({ genre1: genre, g1_avatar: avatar, i: 1 });
+      // }
+      // if (i === 1) {
+      //   this.setState({ genre2: genre, g2_avatar: avatar, i: 2 });
+      // }
+      // if (i === 2) {
+      //   this.setState({ genre3: genre, g3_avatar: avatar, i: 0 });
+      //   this.updateProfile();
+      // }
+    }
   };
-
   // need current logged in user
   updateProfile = async () => {
     // this.state.username ,genre, avatar
@@ -97,6 +97,7 @@ class Genres extends React.Component {
       console.dir(err);
     }
   };
+
   componentDidMount() {
     this.fetchGenres();
   }
