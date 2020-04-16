@@ -7,28 +7,31 @@ import {
   // LatLng,
 } from 'react-google-maps';
 // import APIKey from "../config";
+import ViewTogglerDirections from './ViewTogglerDirections';
 
 class RouteCalculator extends Component {
   state = {
     userLocation: null,
     directions: null,
-    polyline: null,
+    textDirections: true,
   };
 
   // panelUpdate = () => {}
-  // componentDidMount() {
-  //   this.setState({ userLocation: this.props.userLocation });
-  // }
+  componentDidMount() {
+    this.setState({ userLocation: this.props.userLocation });
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.userLocation !== this.state.userLocation) {
       this.setState({ userLocation: this.props.userLocation });
     }
+
     if (
       this.props.destination !== prevProps.destination ||
       this.props.stops !== prevProps.stops
     ) {
-      this.setState({ directions: null });
+      this.setState({ directions: null, textDirections: false });
+
       console.log('updating?', this.props.stops);
       const DirectionsService = new window.google.maps.DirectionsService();
 
@@ -59,15 +62,11 @@ class RouteCalculator extends Component {
             this.setState(
               {
                 directions: { ...result },
+                textDirections: true,
                 // polyline: result.routes[0].overview_polyline,
               },
               () => {
-                console.log(
-                  'state>>>>',
-                  this.state.directions,
-                  'result>>>>',
-                  result
-                );
+                console.log('state>>>>', this.state.textDirections);
               }
             );
           } else {
@@ -87,7 +86,8 @@ class RouteCalculator extends Component {
             panel={document.getElementById('panel')}
           />
         )}
-        <div id="panel">Text directions </div>
+
+        {this.state.directions && <div id="panel">Text directions </div>}
       </div>
     );
   }

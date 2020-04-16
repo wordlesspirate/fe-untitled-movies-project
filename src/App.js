@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import "./App.css";
+import React, { Component } from 'react';
+import './App.css';
 
 // import SimpleReactLightbox from "simple-react-lightbox";
-import Dashboard from "./Components/Dashboard";
-import Home from "./Components/Home";
-import Register from "./Components/Register";
-import Login from "./Components/Login";
-import Gallery from "./Components/Gallery";
-import Usercamera from "./Components/Usercamera";
-import Genres from "./Components/Genres";
-import Profile from "./Components/Profile";
+import Dashboard from './Components/Dashboard';
+import Home from './Components/Home';
+import Register from './Components/Register';
+import Login from './Components/Login';
+import Gallery from './Components/Gallery';
+import Usercamera from './Components/Usercamera';
+import Genres from './Components/Genres';
+import Profile from './Components/Profile';
 
-import { Router, Link } from "@reach/router";
-import { Auth } from "aws-amplify";
+import { Router, Link } from '@reach/router';
+import { Auth } from 'aws-amplify';
 
 class App extends Component {
   state = {
@@ -76,6 +76,7 @@ class App extends Component {
             <Dashboard auth={authProps} path="/maps" />
             <Profile auth={authProps} path="/profile/*" />
             <Genres auth={authProps} path="/profile/genres" />
+            <MovieInformation auth={authPro} path="/movie_information" />
           </Router>
           <div></div>
         </div>
