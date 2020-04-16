@@ -15,9 +15,10 @@ class RouteCalculator extends Component {
     polyline: null,
   };
 
-  componentDidMount() {
-    this.setState({ userLocation: this.props.userLocation });
-  }
+  // panelUpdate = () => {}
+  // componentDidMount() {
+  //   this.setState({ userLocation: this.props.userLocation });
+  // }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.userLocation !== this.state.userLocation) {
@@ -80,10 +81,13 @@ class RouteCalculator extends Component {
   render() {
     return (
       <div>
-        {' '}
         {this.state.directions && (
-          <DirectionsRenderer defaultDirections={this.state.directions} />
-        )}{' '}
+          <DirectionsRenderer
+            defaultDirections={this.state.directions}
+            panel={document.getElementById('panel')}
+          />
+        )}
+        <div id="panel">Text directions </div>
       </div>
     );
   }

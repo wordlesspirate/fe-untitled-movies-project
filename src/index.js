@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import Amplify from "aws-amplify";
-import config from "./config.json";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import Amplify from 'aws-amplify';
+import config from './config.json';
 //import * as serviceWorker from "./serviceWorker";
-import SimpleReactLightbox from "simple-react-lightbox";
+import SimpleReactLightbox from 'simple-react-lightbox';
 
 Amplify.configure({
   Auth: {
@@ -20,9 +20,9 @@ ReactDOM.render(
   <SimpleReactLightbox>
     <App />
   </SimpleReactLightbox>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 //serviceWorker.unregister();
 
-ReactDOM.render(<App />, document.getElementById("root"));
+//ReactDOM.render(<App />, document.getElementById("root"));
 // serviceWorker.unregister();
