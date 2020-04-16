@@ -36,6 +36,7 @@ class App extends Component {
       const user = await Auth.currentAuthenticatedUser();
       this.setUser(user);
     } catch (error) {
+      //ERROR HANDLE NEEDED
       console.log(error);
     }
     this.setState({ isAuthenticating: false });

@@ -1,12 +1,14 @@
 import React from "react";
 import axios from "axios";
 import config from "../config.json";
+//import { Link } from "@reach/router";
 
 class Genres extends React.Component {
   state = {
     genres: [],
-    username: "paulie1",
-    i: 0,
+    username: this.props.auth.user.username,
+    //username: "paulie1",
+    num: 1,
     genre1: "",
     g1_avatar: "",
     genre2: "",
@@ -28,46 +30,72 @@ class Genres extends React.Component {
     }
   };
 
-  num = 1;
-  selectedGenres = [];
-
   selectGenre = (event) => {
-    // console.log(event.target, "< - - - event target");
-    // console.dir(event.target, " < - - - event");
-    // console.log(event, "<- - - -event");
-    //const { i } = this.state;
-
+    let { num } = this.state;
     const genre = event.target.name;
     const avatar = event.target.src;
 
-    //let num = 1;
+    if (num < 4) {
+      console.log(num);
+      if (num === 1) {
+        this.setState({ genre1: genre, g1_avatar: avatar, num: 2 });
+        console.log(
+          this.state.genre1,
+          this.state.g1_avatar,
+          "after setstate 1",
+          num,
+          "num"
+        );
+      }
 
-    if (this.num < 4) {
-      this.selectedGenres.push(
-        `{ genre${this.num}: ${genre}, g${this.num}_avatar: ${avatar} }`
-      );
+      if (num === 2) {
+        this.setState({ genre2: genre, g2_avatar: avatar, num: 3 });
+        console.log(
+          this.state.genre2,
+          this.state.g2_avatar,
+          "after setstate 2",
+          num,
+          "num"
+        );
+      }
 
-      this.num++;
-
-      console.log(this.num, "end");
-      console.log(this.selectedGenres, "selectedGenre Array");
-      console.log(this.selectedGenres, "array outside if");
-
-      // if (i === 0) {
-      //   this.setState({ genre1: genre, g1_avatar: avatar, i: 1 });
-      // }
-      // if (i === 1) {
-      //   this.setState({ genre2: genre, g2_avatar: avatar, i: 2 });
-      // }
-      // if (i === 2) {
-      //   this.setState({ genre3: genre, g3_avatar: avatar, i: 0 });
-      //   this.updateProfile();
-      // }
+      if (num === 3) {
+        console.log(num, "num in this");
+        this.setState({ genre3: genre, g3_avatar: avatar, num: 4 });
+        console.log(
+          this.state.genre3,
+          this.state.g3_avatar,
+          "after setstate 3",
+          num,
+          "num"
+        );
+      }
+      // ++num;
     }
   };
-  // need current logged in user
+
+  saveGenres = () => {
+    const { genre1, genre2, genre3 } = this.state;
+    if (genre1 === "" || genre2 === "" || genre3 === "") {
+      console.log(genre1, "g1,", genre2, "g2", genre3, "g3");
+
+      console.log("select another movie");
+    } else {
+      this.updateProfile();
+      console.log(this.state.genre1, this.state.genre2, this.state.genre3);
+      this.setState({
+        num: 1,
+        genre1: "",
+        g1_avatar: "",
+        genre2: "",
+        g2_avatar: "",
+        genre3: "",
+        g3_avatar: "",
+      });
+    }
+  };
+
   updateProfile = async () => {
-    // this.state.username ,genre, avatar
     const {
       username,
       genre1,
@@ -77,6 +105,7 @@ class Genres extends React.Component {
       genre3,
       g3_avatar,
     } = this.state;
+
     try {
       const params = {
         username: username,
@@ -112,20 +141,21 @@ class Genres extends React.Component {
           <div className={"genre-selection"} disabled={this.state.i > 2}>
             {this.state.genres.map(({ genre, g_avatar }, i) => {
               return (
-                <button onClick={this.selectGenre} key={i}>
+                <button
+                  //disabled={this.num === 4}
+                  onClick={this.selectGenre}
+                  key={i}
+                >
                   {genre}
 
-                  <img
-                    name={genre}
-                    alt="genre-avatar"
-                    // value={g_avatar}
-                    // src="https://img.icons8.com/nolan/64/react-native.png"
-                    src={g_avatar}
-                  />
+                  <img name={genre} alt="genre-avatar" src={g_avatar} />
                 </button>
               );
             })}
-            <a href="/profile">Back to Profile</a>
+
+            {/* <Link to="/profile"> */}
+            <button onClick={this.saveGenres}>Save</button>
+            {/* </Link> */}
           </div>
         </main>
       </>

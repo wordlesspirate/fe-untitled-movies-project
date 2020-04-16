@@ -9,13 +9,16 @@ class Profile extends React.Component {
   state = {
     profile: {},
     genres: [],
+    username: this.props.auth.user.username,
     // username needs to come from current session
-    username: "paulie1",
+    // username: "paulie1",
     //username: "justin24" -- no genre's set up,
     //username: "justin24",
   };
 
   fetchProfile = async () => {
+    const { username } = this.state;
+    console.log(username);
     try {
       const res = await axios.get(
         // this needs current user in seession
@@ -32,12 +35,12 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
+    console.log("fetching genres?");
     this.fetchProfile();
   }
 
   render() {
     const {
-      username,
       genre1,
       genre2,
       genre3,
@@ -59,7 +62,7 @@ class Profile extends React.Component {
           ) : (
             <img alt="users-avatar" src={`${avatar_url}`} />
           )}
-          <label htmlFor="profileimg">{username}</label>
+          <label htmlFor="profileimg">{this.state.username}</label>
         </section>
         <section className="profile-genres">
           <h2>Your favourite genres</h2>
@@ -78,7 +81,7 @@ class Profile extends React.Component {
 
           <div>
             {genre2}
-            {!avatar_url ? (
+            {!g2_avatar ? (
               <img
                 className={"g-avatar"}
                 alt="users-avatar"
