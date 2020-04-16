@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Auth } from "aws-amplify";
 class Login extends React.Component {
@@ -16,13 +15,11 @@ class Login extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     try {
-
       const user = await Auth.signIn(this.state.username, this.state.password);
       this.props.auth.setAuthenticated(true);
       this.props.auth.userInfo(user);
 
       await Auth.signIn(this.state.username, this.state.password);
-
     } catch (error) {
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);
@@ -67,4 +64,3 @@ class Login extends React.Component {
   }
 }
 export default Login;
-
