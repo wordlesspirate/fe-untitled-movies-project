@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ErrorHandler from "./ErrorHandler";
 import aws from "aws-sdk";
 import { SRLWrapper } from "simple-react-lightbox";
 
@@ -6,6 +7,7 @@ class ImageCard extends Component {
   state = {
     isLoading: true,
     img: "",
+    error: null,
   };
 
   getImage = () => {
@@ -20,8 +22,12 @@ class ImageCard extends Component {
       .then((response) => {
         this.setState({ isLoading: false, img: response.Body.toString() });
       })
-      .catch((err) => {
-        console.dir(err);
+      .catch((error) => {
+        const message =
+          "We have not being able to load your image, please go back to your profile and try again";
+        this.setState({
+          error: { message },
+        });
       });
   };
 
@@ -36,6 +42,7 @@ class ImageCard extends Component {
       image.src = this.state.img;
       return (
         <div>
+          <ErrorHandler apierrors={this.state.error} />
           <SRLWrapper>
             <img
               alt={"user-img"}

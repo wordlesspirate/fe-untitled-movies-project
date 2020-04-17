@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Marker } from "react-google-maps";
-import RouteCalculator from "./RouteCalculator";
+import React, { Component } from 'react';
+import { Marker } from 'react-google-maps';
+import RouteCalculator from './RouteCalculator';
 
 class UserLocation extends Component {
   constructor(props) {

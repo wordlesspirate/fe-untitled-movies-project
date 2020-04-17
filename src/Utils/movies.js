@@ -1,12 +1,12 @@
-import { IMDbKey } from "../config";
-const { extractTitleId } = require("./moviemanipulation");
+import { IMDbKey } from '../config';
+const { extractTitleId } = require('./moviemanipulation');
 
 export const getMovieId = (movieTitle) => {
   return fetch(`https://imdb8.p.rapidapi.com/title/find?q=${movieTitle}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "x-rapidapi-host": "imdb8.p.rapidapi.com",
-      "x-rapidapi-key": IMDbKey,
+      'x-rapidapi-host': 'imdb8.p.rapidapi.com',
+      'x-rapidapi-key': IMDbKey,
     },
   })
     .then((response) => response.json())
@@ -25,10 +25,10 @@ export const getMovieLocations = (movieId) => {
   return fetch(
     `https://imdb8.p.rapidapi.com/title/get-filming-locations?tconst=${movieId}`,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "x-rapidapi-host": "imdb8.p.rapidapi.com",
-        "x-rapidapi-key": IMDbKey,
+        'x-rapidapi-host': 'imdb8.p.rapidapi.com',
+        'x-rapidapi-key': IMDbKey,
       },
     }
   )
@@ -45,3 +45,39 @@ export const getMovieLocations = (movieId) => {
       console.log(err);
     });
 };
+
+export const getMovieLocationsInfo = (movieId) => {
+  return fetch(
+    `https://imdb8.p.rapidapi.com/title/get-filming-locations?tconst=${movieId}`,
+    {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-host': 'imdb8.p.rapidapi.com',
+        'x-rapidapi-key': IMDbKey,
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      const locationInfo = response.locations.map((location) => {
+        if (location.extras) {
+          return {
+            movieLocation: location.location,
+            locationExtras: location.extras[0],
+          };
+        } else {
+          return {
+            movieLocation: location.location,
+            locationExtras: 'Sorry, no available location information',
+          };
+        }
+      });
+      console.log(locationInfo);
+      return locationInfo;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+//`https://imdb8.p.rapidapi.com/title/get-overview-details`

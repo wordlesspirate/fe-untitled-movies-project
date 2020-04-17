@@ -1,10 +1,22 @@
 import React from "react";
 import { Auth } from "aws-amplify";
+import ErrorHandler from "./ErrorHandler";
+
 class Login extends React.Component {
   state = {
     username: "",
     password: "",
-    errors: "",
+    errors: {
+      cognito: null,
+    },
+  };
+
+  clearErrorState = () => {
+    this.setState({
+      errors: {
+        cognito: null,
+      },
+    });
   };
   handleChange = (event) => {
     const key = event.target.name;
@@ -14,12 +26,12 @@ class Login extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
+    this.clearErrorState();
     try {
       const user = await Auth.signIn(this.state.username, this.state.password);
       this.props.auth.setAuthenticated(true);
       this.props.auth.userInfo(user);
-
-      await Auth.signIn(this.state.username, this.state.password);
+      this.props.history.push("/home");
     } catch (error) {
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);
@@ -34,6 +46,8 @@ class Login extends React.Component {
   render() {
     return (
       <div>
+        <h1>Log in</h1>
+        <ErrorHandler formerrors={this.state.errors} />
         <form onSubmit={this.handleSubmit}>
           <br />
           <label>
@@ -58,6 +72,9 @@ class Login extends React.Component {
           <br />
 
           <button type="submit">Login</button>
+
+          <h6>Register your account</h6>
+          <a href="/register">Sign Up Here</a>
         </form>
       </div>
     );
