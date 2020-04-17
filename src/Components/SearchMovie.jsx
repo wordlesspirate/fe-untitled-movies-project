@@ -4,6 +4,9 @@ import * as api from "../Utils/api";
 // import DisplayMarkers from "./DisplayMarkers";
 import NewWrappedMap from "./NewMovieMap";
 import { APIKey } from "../config.js";
+import Button from "@material-ui/core/Button";
+import NavigationIcon from "@material-ui/icons/Navigation";
+import TextField from "@material-ui/core/TextField";
 
 class SearchMovie extends Component {
   state = {
@@ -48,12 +51,16 @@ class SearchMovie extends Component {
     return (
       <>
         <form onSubmit={this.handleSubmit}>
-          <input
+          <TextField
             id="movie-search"
-            type="text"
+            label="Search for a movie"
+            variant="outlined"
             onChange={this.handleChange}
-          ></input>
-          <button id="movie-search">Search Movie</button>
+          />
+          <Button variant="contained" id="movie-search">
+            <NavigationIcon />
+            Find
+          </Button>
         </form>
         {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
         <div style={{ width: "75%", height: "100vh" }}>
