@@ -12,23 +12,29 @@ class RouteCalculator extends Component {
   state = {
     userLocation: null,
     directions: null,
-    polyline: null,
+    textDirections: false,
   };
 
   // panelUpdate = () => {}
-  // componentDidMount() {
-  //   this.setState({ userLocation: this.props.userLocation });
-  // }
+  componentDidMount() {
+    this.setState({ userLocation: this.props.userLocation });
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.userLocation !== this.state.userLocation) {
       this.setState({ userLocation: this.props.userLocation });
     }
+
     if (
       this.props.destination !== prevProps.destination ||
       this.props.stops !== prevProps.stops
     ) {
+      if (this.state.directions !== prevState.directions) {
+        this.setState({ textDirections: false });
+      }
+
       this.setState({ directions: null });
+
       console.log('updating?', this.props.stops);
       const DirectionsService = new window.google.maps.DirectionsService();
 
@@ -59,15 +65,11 @@ class RouteCalculator extends Component {
             this.setState(
               {
                 directions: { ...result },
+                textDirections: true,
                 // polyline: result.routes[0].overview_polyline,
               },
               () => {
-                console.log(
-                  'state>>>>',
-                  this.state.directions,
-                  'result>>>>',
-                  result
-                );
+                console.log('state>>>>', this.state.textDirections);
               }
             );
           } else {
@@ -87,7 +89,8 @@ class RouteCalculator extends Component {
             panel={document.getElementById('panel')}
           />
         )}
-        <div id="panel">Text directions </div>
+
+        <div id="panel"> </div>
       </div>
     );
   }

@@ -1,14 +1,33 @@
-import React, { Component } from "react";
-import { getMovieId, getMovieLocations } from "../Utils/movies";
-import * as api from "../Utils/api";
+import React, { Component } from 'react';
+import {
+  getMovieId,
+  getMovieLocations,
+  getMovieLocationsInfo,
+} from '../Utils/movies';
+import * as api from '../Utils/api';
 // import DisplayMarkers from "./DisplayMarkers";
-import NewWrappedMap from "./NewMovieMap";
-import { APIKey } from "../config.js";
+import NewWrappedMap from './NewMovieMap';
+import { APIKey } from '../config.js';
+import MovieCard from './MovieCard';
+import ViewToggler from './ViewToggler';
+import { Link } from '@reach/router';
+import Header from './Header';
 
 class SearchMovie extends Component {
   state = {
-    movieTitle: "",
+    movieTitle: '',
     coordinates: [],
+    movieId: '',
+    movieInfo: [],
+  };
+
+  handleClick = (event) => {
+    //this.props.setMovieId(this.state.movieId);
+    getMovieLocationsInfo(this.state.movieId).then((movieInfo) => {
+      this.setState({ movieInfo }, () => {
+        console.log(this.state.movieInfo);
+      });
+    });
   };
 
   handleChange = (event) => {
@@ -22,6 +41,7 @@ class SearchMovie extends Component {
     event.preventDefault();
 
     getMovieId(this.state.movieTitle).then((movieId) => {
+      this.setState({ movieId });
       getMovieLocations(movieId).then((addresses) => {
         // need a promise all,
         // should resolve when you have all the api data
@@ -30,16 +50,10 @@ class SearchMovie extends Component {
         return Promise.all(
           addresses.map((address) => api.getLatLng(address))
         ).then((coords) => {
-          this.setState({ coordinates: coords });
+          this.setState({ coordinates: coords }, () => {
+            console.log(this.state.movieId);
+          });
         });
-
-        // const coords = [];
-        // addresses.forEach((address) => {
-        //   api.getLatLng(address).then((latLng) => {
-        //     coords.push(latLng);
-        //   });
-        // });
-        //figure out how to deal with errors/empty coordinates
       });
     });
   };
@@ -47,6 +61,7 @@ class SearchMovie extends Component {
   render() {
     return (
       <>
+        <Header />
         <form onSubmit={this.handleSubmit}>
           <input
             id="movie-search"
@@ -54,17 +69,28 @@ class SearchMovie extends Component {
             onChange={this.handleChange}
           ></input>
           <button id="movie-search">Search Movie</button>
+          {/* <Link to="/movie_information"> */}{' '}
+          {this.state.movieId && (
+            <button onClick={this.handleClick}>View Movie Info</button>
+          )}
+          {/* </Link> */}
         </form>
         {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
-        <div style={{ width: "75%", height: "100vh" }}>
+
+        <div style={{ width: '75%', height: '100vh' }}>
           <NewWrappedMap
             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${APIKey}`}
-            loadingElement={<div style={{ height: "100" }} />}
-            containerElement={<div style={{ height: "100%" }} />}
-            mapElement={<div style={{ height: "100%" }} />}
+            loadingElement={<div style={{ height: '100' }} />}
+            containerElement={<div style={{ height: '100%' }} />}
+            mapElement={<div style={{ height: '100%' }} />}
             coordinates={this.state.coordinates}
           />
         </div>
+        <ViewToggler>
+          {this.state.movieInfo.map((info) => {
+            return <MovieCard key={info.movieLocation} {...info} />;
+          })}
+        </ViewToggler>
       </>
     );
   }
