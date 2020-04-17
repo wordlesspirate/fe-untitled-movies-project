@@ -2,6 +2,40 @@ import React from "react";
 import { Auth } from "aws-amplify";
 import axios from "axios";
 import config from "../config.json";
+import {
+  Button,
+  TextField,
+  Grid,
+  Typography,
+  Container,
+} from "@material-ui/core";
+
+import { withStyles } from "@material-ui/core/styles";
+
+const useStyles = (theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+  submitButton: {
+    marginTop: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+});
 
 class Register extends React.Component {
   state = {
@@ -57,6 +91,7 @@ class Register extends React.Component {
   };
 
   handleSubmit = async (event) => {
+    console.log("IM FURRNING THIS IT");
     event.preventDefault();
     const { username, email, password, name } = this.state;
 
@@ -86,62 +121,82 @@ class Register extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <br />
-          <label>
-            Username:
-            <input
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <br />
-          <label>
-            Email:
-            <input
-              name="email"
-              required
-              value={this.state.email}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <b />
-          <label>
-            Password:
-            <input
-              name="password"
-              required
-              value={this.state.password}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <label>
-            Confirm Password:
-            <input
-              name="confirmpassword"
-              required
-              value={this.state.confirmpassword}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <label>
-            Name:
-            <input
-              name="name"
-              required
-              value={this.state.name}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <br />
-          <button type="submit">Create User</button>
-        </form>
-      </div>
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Typography component="h6" variant="h2">
+            Sign up
+          </Typography>
+          <form onSubmit={this.handleSubmit} className={classes.form}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  autoComplete="username"
+                  name="username"
+                  variant="outlined"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                  required
+                  fullWidth
+                  id="username"
+                  label="username"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="email"
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="password"
+                  type="password"
+                  label="password"
+                  name="password"
+                  autoComplete="password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="name"
+                  label="your name"
+                  type="name"
+                  id="name"
+                  autoComplete="your name"
+                />
+              </Grid>
+              <Grid className={classes.submitButton} item xs={12}>
+                <Button variant="contained" color="primary" type="submit">
+                  Sign up
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        </div>
+      </Container>
     );
   }
 }
-export default Register;
+
+export default withStyles(useStyles)(Register);

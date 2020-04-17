@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
-import Picture from "./Picture";
 import ReactS3 from "react-s3";
 import keys from "../config.json";
 
@@ -67,7 +66,6 @@ class Usercamera extends Component {
             this.handleCameraStop();
           }}
         />
-        <Picture photo={this.state.picData} />
       </div>
     );
   }

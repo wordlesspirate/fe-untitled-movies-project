@@ -1,11 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import Amplify from 'aws-amplify';
-import config from './config.json';
-//import * as serviceWorker from "./serviceWorker";
-import SimpleReactLightbox from 'simple-react-lightbox';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import Amplify from "aws-amplify";
+import config from "./config.json";
+import SimpleReactLightbox from "simple-react-lightbox";
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "./Components/theme";
 
 Amplify.configure({
   Auth: {
@@ -17,12 +18,12 @@ Amplify.configure({
 });
 
 ReactDOM.render(
-  <SimpleReactLightbox>
-    <App />
-  </SimpleReactLightbox>,
-  document.getElementById('root')
+  <>
+    <SimpleReactLightbox>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </SimpleReactLightbox>
+  </>,
+  document.getElementById("root")
 );
-//serviceWorker.unregister();
-
-//ReactDOM.render(<App />, document.getElementById("root"));
-// serviceWorker.unregister();
