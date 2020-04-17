@@ -54,7 +54,14 @@ class UserLocation extends Component {
   render() {
     return (
       <div>
-        {<Marker position={this.state} />}
+        {
+          <Marker
+            position={this.state}
+            icon={{
+              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+            }}
+          />
+        }
         <RouteCalculator
           userLocation={this.state}
           movieLocations={this.props.coordinates}
