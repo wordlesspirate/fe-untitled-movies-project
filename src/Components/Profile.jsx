@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import config from "../config.json";
-import { Link } from "@reach/router";
+import ErrorHandler from "./ErrorHandler";
 
 import "../App.css";
 
@@ -10,10 +10,7 @@ class Profile extends React.Component {
     profile: {},
     genres: [],
     username: this.props.auth.user.username,
-    // username needs to come from current session
-    // username: "paulie1",
-    //username: "justin24" -- no genre's set up,
-    //username: "justin24",
+    error: null,
   };
 
   fetchProfile = async () => {
@@ -21,16 +18,17 @@ class Profile extends React.Component {
     console.log(username);
     try {
       const res = await axios.get(
-        // this needs current user in seession
         `${config.api.invokeURL}/profile/${this.state.username}`
       );
 
       const profile = res.data;
       this.setState({ profile: profile });
-    } catch (err) {
-      //ERROR HANDLING
-      console.dir(err);
-      console.log(`An error has occurred: ${err}`);
+    } catch (error) {
+      const message =
+        "We have not being able to fetch your profile, please log out and try again.";
+      this.setState({
+        error: { message },
+      });
     }
   };
 
@@ -52,6 +50,7 @@ class Profile extends React.Component {
 
     return (
       <div>
+        <ErrorHandler apierrors={this.state.error} />
         <section className={"profile-avatar"}>
           {!avatar_url ? (
             <img
@@ -103,7 +102,7 @@ class Profile extends React.Component {
               <img alt="users-avatar" src={g3_avatar} />
             )}
           </div>
-          <Link to="/profile/genres">Change your favourtie genres </Link>
+          <a href="/profile/genres">Change your favourite genres </a>
         </section>
       </div>
     );

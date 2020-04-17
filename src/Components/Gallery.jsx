@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import ImageCard from "./ImageCard";
+import ErrorHandler from "./ErrorHandler";
 const aws = require("aws-sdk");
-//const config = require("../keys.json");
+
 const config = require("../config.json");
 
 class Gallery extends Component {
   state = {
-    userPics: "",
+    userPics: [],
     isLoading: true,
+    error: null,
   };
 
   getImages = async () => {
@@ -31,7 +33,11 @@ class Gallery extends Component {
           this.setState({ userPics: data.Contents, isLoading: false });
         });
     } catch (error) {
-      console.log(error);
+      const message =
+        "We have not being able to fetch your photos, please go back to your profile and try again";
+      this.setState({
+        error: { message },
+      });
     }
   };
 
@@ -42,17 +48,27 @@ class Gallery extends Component {
   render() {
     if (this.state.isLoading) return "Loading ....";
     if (!this.state.isLoading) {
-      //const pic = this.state.userPics.Key;
       return (
-        <ul>
-          {this.state.userPics.map((item) => {
-            return (
-              <li key={item.Key}>
-                <ImageCard imageKey={item.Key} />
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          <div>
+            <h1>Gallery</h1>
+            <div>
+              {this.state.userPics.length === 0
+                ? "You have not snapped any shots!"
+                : ""}
+            </div>
+            <ErrorHandler apierrors={this.state.error} />
+            <ul>
+              {this.state.userPics.map((item) => {
+                return (
+                  <li key={item.Key}>
+                    <ImageCard imageKey={item.Key} />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </>
       );
     }
   }
