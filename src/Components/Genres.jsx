@@ -172,9 +172,7 @@ class Genres extends React.Component {
                 );
               })}
 
-              {/* <Link to="/profile"> */}
               <button onClick={this.saveGenres}>Save</button>
-              {/* </Link> */}
             </div>
           </main>
         </div>
