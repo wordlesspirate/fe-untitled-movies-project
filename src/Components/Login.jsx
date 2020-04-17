@@ -1,5 +1,6 @@
 import React from "react";
 import { Auth } from "aws-amplify";
+import ErrorHandler from "./ErrorHandler";
 
 import "typeface-roboto";
 import {
@@ -43,9 +44,6 @@ const useStyles = (theme) => ({
     alignItems: "center",
   },
 });
-
-import ErrorHandler from "./ErrorHandler";
-
 
 class Login extends React.Component {
   state = {
@@ -93,7 +91,6 @@ class Login extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}></Avatar>
@@ -102,34 +99,24 @@ class Login extends React.Component {
             onSubmit={this.handleSubmit}
             noValidate
           >
+            {/* <ErrorHandler formerrors={this.state.errors} /> */}
             <Typography component="h6" variant="h2">
               Sign in ...
             </Typography>
             <TextField
               variant="outlined"
               margin="normal"
-
-      <div>
-        <h1>Log in</h1>
-        <ErrorHandler formerrors={this.state.errors} />
-        <form onSubmit={this.handleSubmit}>
-          <br />
-          <label>
-            Username:
-            <input
               name="username"
               required
-
               value={this.state.username}
               onChange={this.handleChange}
-              required
               fullWidth
               id="username"
               label="username"
-              name="username"
               autoComplete="email"
               autoFocus
-            ></TextField>
+            />
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -137,13 +124,12 @@ class Login extends React.Component {
               fullWidth
               value={this.state.password}
               onChange={this.handleChange}
-
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
-            ></TextField>
+            />
             <Grid item className={classes.submitbutton}>
               <Button variant="contained" color="primary" type="submit">
                 Login
@@ -157,18 +143,6 @@ class Login extends React.Component {
           </form>
         </div>
       </Container>
-
-            ></input>
-          </label>
-          <br />
-
-          <button type="submit">Login</button>
-
-          <h6>Register your account</h6>
-          <a href="/register">Sign Up Here</a>
-        </form>
-      </div>
-
     );
   }
 }

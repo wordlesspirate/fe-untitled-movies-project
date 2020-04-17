@@ -2,6 +2,7 @@ import React from "react";
 import { Auth } from "aws-amplify";
 import axios from "axios";
 import config from "../config.json";
+import ErrorHandler from "./ErrorHandler";
 
 import {
   Button,
@@ -37,9 +38,6 @@ const useStyles = (theme) => ({
     alignItems: "center",
   },
 });
-
-import ErrorHandler from "./ErrorHandler";
-
 
 class Register extends React.Component {
   state = {
@@ -150,7 +148,6 @@ class Register extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Typography component="h6" variant="h2">
@@ -224,63 +221,7 @@ class Register extends React.Component {
         </div>
       </Container>
 
-      <div>
-        <h1>Register</h1>
-        <ErrorHandler formerrors={this.state.errors} />
-        <form onSubmit={this.handleSubmit}>
-          <br />
-          <label>
-            Username:
-            <input
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <br />
-          <label>
-            Email:
-            <input
-              name="email"
-              required
-              value={this.state.email}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <b />
-          <label>
-            Password:
-            <input
-              name="password"
-              required
-              value={this.state.password}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <label>
-            Confirm Password:
-            <input
-              name="confirmpassword"
-              required
-              value={this.state.confirmpassword}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <label>
-            Name:
-            <input
-              name="name"
-              required
-              value={this.state.name}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <br />
-          <button type="submit">Create User</button>
-        </form>
-      </div>
-
+      // <ErrorHandler formerrors={this.state.errors} />
     );
   }
 }
