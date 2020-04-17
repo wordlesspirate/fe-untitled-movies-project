@@ -1,22 +1,5 @@
-import React, { Component } from 'react';
-import './App.css';
-
-// import SimpleReactLightbox from "simple-react-lightbox";
-//import Dashboard from './Components/Dashboard';
-import Home from './Components/Home';
-import Register from './Components/Register';
-import Login from './Components/Login';
-import Gallery from './Components/Gallery';
-import Usercamera from './Components/Usercamera';
-import Genres from './Components/Genres';
-import Profile from './Components/Profile';
-import MovieInformation from './Components/MovieInformation';
-import SearchMovie from './Components/SearchMovie';
-
-import { Router, Link } from '@reach/router';
-import { Auth } from 'aws-amplify';
-//import SearchMovie from './Components/SearchMovie';
-
+import React, { Component } from "react";
+import "./App.css";
 import Dashboard from "./Components/Dashboard";
 import Home from "./Components/Home";
 import Register from "./Components/Register";
@@ -28,7 +11,6 @@ import Profile from "./Components/Profile";
 import Navbar from "./Components/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth } from "aws-amplify";
-
 
 class App extends Component {
   state = {
@@ -77,27 +59,6 @@ class App extends Component {
           <Router>
             <div>
               <Navbar auth={authProps} />
-MovieInformation
-            <Register
-              userProps={this.props}
-              auth={authProps}
-              path="/register"
-            />
-            {/* <Home auth={authProps} path="/home" />
-            <Usercamera auth={authProps} path="/userCamera" />
-            <Gallery auth={authProps} path="/gallery" /> */}
-            <SearchMovie
-              auth={authProps}
-              setMovieId={this.setMovieId}
-              path="/maps"
-            />
-            {/* <Profile auth={authProps} path="/profile/*" />
-            <Genres auth={authProps} path="/profile/genres" /> */}
-            <MovieInformation
-              auth={authProps}
-              movieId={this.state.movieId}
-              path="/movie_information"
-            />
               <Switch>
                 <Route
                   exact
@@ -147,7 +108,6 @@ MovieInformation
                 />
               </Switch>
             </div>
-dev
           </Router>
         </div>
       )

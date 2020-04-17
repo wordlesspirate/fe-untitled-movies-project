@@ -26,7 +26,7 @@ class Navbar extends Component {
           <a href="/maps">Dashboard</a>
           <a href="/userCamera">Camera</a>
           <a href="/gallery">Gallery</a>
-          <a href="/profile">My Profile</a>}
+          <a href="/profile">My Profile</a>
           {this.props.auth.isAuthenticated ? (
             <a href="/" onClick={this.handleLogOut}>
               Log out

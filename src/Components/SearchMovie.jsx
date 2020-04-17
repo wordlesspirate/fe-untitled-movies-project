@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   getMovieId,
   getMovieLocations,
   getMovieLocationsInfo,
-} from '../Utils/movies';
-import * as api from '../Utils/api';
+} from "../Utils/movies";
+import * as api from "../Utils/api";
 // import DisplayMarkers from "./DisplayMarkers";
 
 import NewWrappedMap from "./NewMovieMap";
@@ -13,19 +13,14 @@ import Button from "@material-ui/core/Button";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-
-
-import MovieCard from './MovieCard';
-import ViewToggler from './ViewToggler';
-import { Link } from '@reach/router';
-import Header from './Header';
-
+import MovieCard from "./MovieCard";
+import ViewToggler from "./ViewToggler";
 
 class SearchMovie extends Component {
   state = {
-    movieTitle: '',
+    movieTitle: "",
     coordinates: [],
-    movieId: '',
+    movieId: "",
     movieInfo: [],
   };
 
@@ -69,7 +64,6 @@ class SearchMovie extends Component {
   render() {
     return (
       <>
-
         <Typography variant="body2" color="text" align="center">
           <form onSubmit={this.handleSubmit}>
             <TextField
@@ -82,6 +76,9 @@ class SearchMovie extends Component {
               <NavigationIcon />
               Find
             </Button>
+            {this.state.movieId && (
+              <button onClick={this.handleClick}>View Movie Info</button>
+            )}
           </form>
         </Typography>
         <>
@@ -108,32 +105,11 @@ class SearchMovie extends Component {
             loadingElement={<div style={{ height: "100%" }} />}
             containerElement={<div style={{ height: "100%" }} />}
             mapElement={<div style={{ height: "100%" }} />}
-
-        <Header />
-        <form onSubmit={this.handleSubmit}>
-          <input
-            id="movie-search"
-            type="text"
-            onChange={this.handleChange}
-          ></input>
-          <button id="movie-search">Search Movie</button>
-          {/* <Link to="/movie_information"> */}{' '}
-          {this.state.movieId && (
-            <button onClick={this.handleClick}>View Movie Info</button>
-          )}
-          {/* </Link> */}
-        </form>
-        {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
-
-        <div style={{ width: '75%', height: '100vh' }}>
-          <NewWrappedMap
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${APIKey}`}
-            loadingElement={<div style={{ height: '100' }} />}
-            containerElement={<div style={{ height: '100%' }} />}
-            mapElement={<div style={{ height: '100%' }} />}
-
             coordinates={this.state.coordinates}
           />
+
+          {/* </Link> */}
+          {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
         </div>
         <ViewToggler>
           {this.state.movieInfo.map((info) => {
