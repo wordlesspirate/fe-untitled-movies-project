@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 // import SimpleReactLightbox from "simple-react-lightbox";
-import Dashboard from './Components/Dashboard';
+//import Dashboard from './Components/Dashboard';
 import Home from './Components/Home';
 import Register from './Components/Register';
 import Login from './Components/Login';
@@ -10,15 +10,19 @@ import Gallery from './Components/Gallery';
 import Usercamera from './Components/Usercamera';
 import Genres from './Components/Genres';
 import Profile from './Components/Profile';
+import MovieInformation from './Components/MovieInformation';
+import SearchMovie from './Components/SearchMovie';
 
 import { Router, Link } from '@reach/router';
 import { Auth } from 'aws-amplify';
+//import SearchMovie from './Components/SearchMovie';
 
 class App extends Component {
   state = {
     isAuthenticated: false,
     isAuthenticating: true,
     user: null,
+    movieId: null,
   };
 
   setAuthStatus = (authenticated) => {
@@ -27,6 +31,10 @@ class App extends Component {
 
   setUser = (user) => {
     this.setState({ user: user });
+  };
+
+  setMovieId = (movieId) => {
+    this.setState({ movieId });
   };
 
   async componentDidMount() {
@@ -70,13 +78,21 @@ class App extends Component {
               auth={authProps}
               path="/register"
             />
-            <Home auth={authProps} path="/home" />
+            {/* <Home auth={authProps} path="/home" />
             <Usercamera auth={authProps} path="/userCamera" />
-            <Gallery auth={authProps} path="/gallery" />
-            <Dashboard auth={authProps} path="/maps" />
-            <Profile auth={authProps} path="/profile/*" />
-            <Genres auth={authProps} path="/profile/genres" />
-            <MovieInformation auth={authPro} path="/movie_information" />
+            <Gallery auth={authProps} path="/gallery" /> */}
+            <SearchMovie
+              auth={authProps}
+              setMovieId={this.setMovieId}
+              path="/maps"
+            />
+            {/* <Profile auth={authProps} path="/profile/*" />
+            <Genres auth={authProps} path="/profile/genres" /> */}
+            <MovieInformation
+              auth={authProps}
+              movieId={this.state.movieId}
+              path="/movie_information"
+            />
           </Router>
           <div></div>
         </div>

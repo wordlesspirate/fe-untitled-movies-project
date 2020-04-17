@@ -7,13 +7,12 @@ import {
   // LatLng,
 } from 'react-google-maps';
 // import APIKey from "../config";
-import ViewTogglerDirections from './ViewTogglerDirections';
 
 class RouteCalculator extends Component {
   state = {
     userLocation: null,
     directions: null,
-    textDirections: true,
+    textDirections: false,
   };
 
   // panelUpdate = () => {}
@@ -30,7 +29,11 @@ class RouteCalculator extends Component {
       this.props.destination !== prevProps.destination ||
       this.props.stops !== prevProps.stops
     ) {
-      this.setState({ directions: null, textDirections: false });
+      if (this.state.directions !== prevState.directions) {
+        this.setState({ textDirections: false });
+      }
+
+      this.setState({ directions: null });
 
       console.log('updating?', this.props.stops);
       const DirectionsService = new window.google.maps.DirectionsService();
@@ -87,7 +90,7 @@ class RouteCalculator extends Component {
           />
         )}
 
-        {this.state.directions && <div id="panel">Text directions </div>}
+        <div id="panel"> </div>
       </div>
     );
   }

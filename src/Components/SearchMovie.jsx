@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import {
-  getMovieId,
-  getMovieLocations,
-  getMovieLocationsInfo,
-} from '../Utils/movies';
+import { getMovieId, getMovieLocations } from '../Utils/movies';
 import * as api from '../Utils/api';
 // import DisplayMarkers from "./DisplayMarkers";
 import NewWrappedMap from './NewMovieMap';
 import { APIKey } from '../config.js';
 import MovieCard from './MovieCard';
 import ViewToggler from './ViewToggler';
+import { Link } from '@reach/router';
+import Header from './Header';
 
 class SearchMovie extends Component {
   state = {
@@ -20,11 +18,13 @@ class SearchMovie extends Component {
   };
 
   handleClick = (event) => {
-    getMovieLocationsInfo(this.state.movieId).then((movieInfo) => {
-      this.setState({ movieInfo }, () => {
-        console.log(this.state.movieInfo);
-      });
-    });
+    this.props.setMovieId(this.state.movieId);
+    // getMovieLocationsInfo(this.props.movieId).then((movieInfo) => {
+    //   this.setState({ movieInfo }, () => {
+    //     console.log(this.state.movieInfo);
+    //   });
+
+    // });
   };
 
   handleChange = (event) => {
@@ -58,6 +58,7 @@ class SearchMovie extends Component {
   render() {
     return (
       <>
+        <Header />
         <form onSubmit={this.handleSubmit}>
           <input
             id="movie-search"
@@ -65,17 +66,11 @@ class SearchMovie extends Component {
             onChange={this.handleChange}
           ></input>
           <button id="movie-search">Search Movie</button>
-          <Link
-            to={{
-              pathname: '/movie_information',
-              state: {
-                movieInfo: this.state.movieInfo,
-                movieTitle: this.state.movieTitle,
-              },
-            }}
-          >
+          <Link to="/movie_information">
             {' '}
-            <button onClick={this.handleClick}>View Movie Info</button>
+            {this.state.movieId && (
+              <button onClick={this.handleClick}>View Movie Info</button>
+            )}
           </Link>
         </form>
         {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
