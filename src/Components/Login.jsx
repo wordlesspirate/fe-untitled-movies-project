@@ -1,5 +1,6 @@
 import React from "react";
 import { Auth } from "aws-amplify";
+
 import "typeface-roboto";
 import {
   Button,
@@ -43,11 +44,24 @@ const useStyles = (theme) => ({
   },
 });
 
+import ErrorHandler from "./ErrorHandler";
+
+
 class Login extends React.Component {
   state = {
     username: "",
     password: "",
-    errors: "",
+    errors: {
+      cognito: null,
+    },
+  };
+
+  clearErrorState = () => {
+    this.setState({
+      errors: {
+        cognito: null,
+      },
+    });
   };
 
   handleChange = (event) => {
@@ -58,12 +72,12 @@ class Login extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
+    this.clearErrorState();
     try {
       const user = await Auth.signIn(this.state.username, this.state.password);
       this.props.auth.setAuthenticated(true);
       this.props.auth.userInfo(user);
-
-      await Auth.signIn(this.state.username, this.state.password);
+      this.props.history.push("/home");
     } catch (error) {
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);
@@ -79,6 +93,7 @@ class Login extends React.Component {
   render() {
     const { classes } = this.props;
     return (
+
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar className={classes.avatar}></Avatar>
@@ -93,6 +108,18 @@ class Login extends React.Component {
             <TextField
               variant="outlined"
               margin="normal"
+
+      <div>
+        <h1>Log in</h1>
+        <ErrorHandler formerrors={this.state.errors} />
+        <form onSubmit={this.handleSubmit}>
+          <br />
+          <label>
+            Username:
+            <input
+              name="username"
+              required
+
               value={this.state.username}
               onChange={this.handleChange}
               required
@@ -110,6 +137,7 @@ class Login extends React.Component {
               fullWidth
               value={this.state.password}
               onChange={this.handleChange}
+
               name="password"
               label="Password"
               type="password"
@@ -129,6 +157,18 @@ class Login extends React.Component {
           </form>
         </div>
       </Container>
+
+            ></input>
+          </label>
+          <br />
+
+          <button type="submit">Login</button>
+
+          <h6>Register your account</h6>
+          <a href="/register">Sign Up Here</a>
+        </form>
+      </div>
+
     );
   }
 }

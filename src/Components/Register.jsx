@@ -2,6 +2,7 @@ import React from "react";
 import { Auth } from "aws-amplify";
 import axios from "axios";
 import config from "../config.json";
+
 import {
   Button,
   TextField,
@@ -37,6 +38,9 @@ const useStyles = (theme) => ({
   },
 });
 
+import ErrorHandler from "./ErrorHandler";
+
+
 class Register extends React.Component {
   state = {
     username: "",
@@ -46,7 +50,18 @@ class Register extends React.Component {
     email: "",
     errors: {
       cognito: null,
+      passwordmatch: false,
     },
+  };
+
+  clearErrorState = () => {
+    this.setState({
+      errors: {
+        cognito: null,
+
+        passwordmatch: false,
+      },
+    });
   };
   handleChange = (event) => {
     const key = event.target.name;
@@ -65,11 +80,16 @@ class Register extends React.Component {
         password: password,
       };
       await axios.post(`${config.api.invokeURL}/users`, params);
-      console.log(
-        "Thanks for registering, check your email for verification link"
-      );
-    } catch (err) {
-      //ERROR HANDLING HERE
+    } catch (error) {
+      let err = null;
+      console.dir(error);
+      !error.message ? (err = { message: error }) : (err = error);
+      this.setState({
+        error: {
+          ...this.state.errors,
+          cognito: err,
+        },
+      });
     }
   };
 
@@ -82,17 +102,23 @@ class Register extends React.Component {
         username: username,
       };
       await axios.post(`${config.api.invokeURL}/profile/`, params);
-    } catch (err) {
-      //ERROR HANLDER
-      console.dir(err);
-      console.log(err);
-      console.log(`Unable to create profile ${err}`);
+    } catch (error) {
+      let err = null;
+      console.dir(error);
+      !error.message ? (err = { message: error }) : (err = error);
+      this.setState({
+        error: {
+          ...this.state.errors,
+          cognito: err,
+        },
+      });
     }
   };
 
   handleSubmit = async (event) => {
     console.log("IM FURRNING THIS IT");
     event.preventDefault();
+    this.clearErrorState();
     const { username, email, password, name } = this.state;
 
     try {
@@ -106,6 +132,7 @@ class Register extends React.Component {
       }).then((data) => {
         this.addUser(username, email, password, name);
         this.addProfile(username);
+        this.props.history.push("/");
       });
     } catch (error) {
       let err = null;
@@ -123,6 +150,7 @@ class Register extends React.Component {
   render() {
     const { classes } = this.props;
     return (
+
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Typography component="h6" variant="h2">
@@ -195,6 +223,64 @@ class Register extends React.Component {
           </form>
         </div>
       </Container>
+
+      <div>
+        <h1>Register</h1>
+        <ErrorHandler formerrors={this.state.errors} />
+        <form onSubmit={this.handleSubmit}>
+          <br />
+          <label>
+            Username:
+            <input
+              name="username"
+              required
+              value={this.state.username}
+              onChange={this.handleChange}
+            ></input>
+          </label>
+          <br />
+          <label>
+            Email:
+            <input
+              name="email"
+              required
+              value={this.state.email}
+              onChange={this.handleChange}
+            ></input>
+          </label>
+          <b />
+          <label>
+            Password:
+            <input
+              name="password"
+              required
+              value={this.state.password}
+              onChange={this.handleChange}
+            ></input>
+          </label>
+          <label>
+            Confirm Password:
+            <input
+              name="confirmpassword"
+              required
+              value={this.state.confirmpassword}
+              onChange={this.handleChange}
+            ></input>
+          </label>
+          <label>
+            Name:
+            <input
+              name="name"
+              required
+              value={this.state.name}
+              onChange={this.handleChange}
+            ></input>
+          </label>
+          <br />
+          <button type="submit">Create User</button>
+        </form>
+      </div>
+
     );
   }
 }
