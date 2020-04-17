@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import config from "../config.json";
 import { Link } from "@reach/router";
+import Avatar from "@material-ui/core/Avatar";
 
 import "../App.css";
 
@@ -62,7 +63,9 @@ class Profile extends React.Component {
           ) : (
             <img alt="users-avatar" src={`${avatar_url}`} />
           )}
+
           <label htmlFor="profileimg">{this.state.username}</label>
+          <Avatar>VC</Avatar>
         </section>
         <section className="profile-genres">
           <h2>Your favourite genres</h2>

@@ -63,7 +63,14 @@ class SearchMovie extends Component {
           </Button>
         </form>
         {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
-        <div style={{ width: "75%", height: "100vh" }}>
+        {/* <div style={{ width: "75%", height: "100vh" }}> */}
+        <div
+          style={{
+            justifyContent: "center",
+            width: "75%",
+            height: "100vh",
+          }}
+        >
           <NewWrappedMap
             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${APIKey}`}
             loadingElement={<div style={{ height: "100%" }} />}
