@@ -79,3 +79,5 @@ export const getMovieLocationsInfo = (movieId) => {
       console.log(err);
     });
 };
+
+//`https://imdb8.p.rapidapi.com/title/get-overview-details`

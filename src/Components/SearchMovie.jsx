@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { getMovieId, getMovieLocations } from '../Utils/movies';
+import {
+  getMovieId,
+  getMovieLocations,
+  getMovieLocationsInfo,
+} from '../Utils/movies';
 import * as api from '../Utils/api';
 // import DisplayMarkers from "./DisplayMarkers";
 import NewWrappedMap from './NewMovieMap';
@@ -18,13 +22,12 @@ class SearchMovie extends Component {
   };
 
   handleClick = (event) => {
-    this.props.setMovieId(this.state.movieId);
-    // getMovieLocationsInfo(this.props.movieId).then((movieInfo) => {
-    //   this.setState({ movieInfo }, () => {
-    //     console.log(this.state.movieInfo);
-    //   });
-
-    // });
+    //this.props.setMovieId(this.state.movieId);
+    getMovieLocationsInfo(this.state.movieId).then((movieInfo) => {
+      this.setState({ movieInfo }, () => {
+        console.log(this.state.movieInfo);
+      });
+    });
   };
 
   handleChange = (event) => {
@@ -66,12 +69,11 @@ class SearchMovie extends Component {
             onChange={this.handleChange}
           ></input>
           <button id="movie-search">Search Movie</button>
-          <Link to="/movie_information">
-            {' '}
-            {this.state.movieId && (
-              <button onClick={this.handleClick}>View Movie Info</button>
-            )}
-          </Link>
+          {/* <Link to="/movie_information"> */}{' '}
+          {this.state.movieId && (
+            <button onClick={this.handleClick}>View Movie Info</button>
+          )}
+          {/* </Link> */}
         </form>
         {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
 
@@ -84,11 +86,11 @@ class SearchMovie extends Component {
             coordinates={this.state.coordinates}
           />
         </div>
-        {/* <ViewToggler>
+        <ViewToggler>
           {this.state.movieInfo.map((info) => {
             return <MovieCard key={info.movieLocation} {...info} />;
           })}
-        </ViewToggler> */}
+        </ViewToggler>
       </>
     );
   }
