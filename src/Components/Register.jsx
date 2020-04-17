@@ -2,6 +2,7 @@ import React from "react";
 import { Auth } from "aws-amplify";
 import axios from "axios";
 import config from "../config.json";
+import ErrorHandler from "./ErrorHandler";
 
 class Register extends React.Component {
   state = {
@@ -12,7 +13,18 @@ class Register extends React.Component {
     email: "",
     errors: {
       cognito: null,
+      passwordmatch: false,
     },
+  };
+
+  clearErrorState = () => {
+    this.setState({
+      errors: {
+        cognito: null,
+
+        passwordmatch: false,
+      },
+    });
   };
   handleChange = (event) => {
     const key = event.target.name;
@@ -31,11 +43,16 @@ class Register extends React.Component {
         password: password,
       };
       await axios.post(`${config.api.invokeURL}/users`, params);
-      console.log(
-        "Thanks for registering, check your email for verification link"
-      );
-    } catch (err) {
-      //ERROR HANDLING HERE
+    } catch (error) {
+      let err = null;
+      console.dir(error);
+      !error.message ? (err = { message: error }) : (err = error);
+      this.setState({
+        error: {
+          ...this.state.errors,
+          cognito: err,
+        },
+      });
     }
   };
 
@@ -48,16 +65,22 @@ class Register extends React.Component {
         username: username,
       };
       await axios.post(`${config.api.invokeURL}/profile/`, params);
-    } catch (err) {
-      //ERROR HANLDER
-      console.dir(err);
-      console.log(err);
-      console.log(`Unable to create profile ${err}`);
+    } catch (error) {
+      let err = null;
+      console.dir(error);
+      !error.message ? (err = { message: error }) : (err = error);
+      this.setState({
+        error: {
+          ...this.state.errors,
+          cognito: err,
+        },
+      });
     }
   };
 
   handleSubmit = async (event) => {
     event.preventDefault();
+    this.clearErrorState();
     const { username, email, password, name } = this.state;
 
     try {
@@ -71,6 +94,7 @@ class Register extends React.Component {
       }).then((data) => {
         this.addUser(username, email, password, name);
         this.addProfile(username);
+        this.props.history.push("/");
       });
     } catch (error) {
       let err = null;
@@ -88,6 +112,8 @@ class Register extends React.Component {
   render() {
     return (
       <div>
+        <h1>Register</h1>
+        <ErrorHandler formerrors={this.state.errors} />
         <form onSubmit={this.handleSubmit}>
           <br />
           <label>

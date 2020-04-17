@@ -17,6 +17,19 @@ import { Router, Link } from '@reach/router';
 import { Auth } from 'aws-amplify';
 //import SearchMovie from './Components/SearchMovie';
 
+import Dashboard from "./Components/Dashboard";
+import Home from "./Components/Home";
+import Register from "./Components/Register";
+import Login from "./Components/Login";
+import Gallery from "./Components/Gallery";
+import Usercamera from "./Components/Usercamera";
+import Genres from "./Components/Genres";
+import Profile from "./Components/Profile";
+import Navbar from "./Components/Navbar";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Auth } from "aws-amplify";
+
+
 class App extends Component {
   state = {
     isAuthenticated: false,
@@ -60,19 +73,11 @@ class App extends Component {
 
     return (
       !this.state.isAuthenticating && (
-        <div>
-          <nav>
-            <Link to="/">Login</Link>
-            <Link to="/register">Register</Link>
-            <Link to="/home">Home</Link>
-            <Link to="/userCamera">Camera</Link>
-            <Link to="/gallery">Gallery</Link>
-            <Link to="/profile">My Profile</Link>
-            <Link to="/maps">Dashboard</Link>
-          </nav>
+        <div className={"App"}>
           <Router>
-            <Login auth={authProps} path="/" />
-
+            <div>
+              <Navbar auth={authProps} />
+MovieInformation
             <Register
               userProps={this.props}
               auth={authProps}
@@ -93,8 +98,57 @@ class App extends Component {
               movieId={this.state.movieId}
               path="/movie_information"
             />
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={(props) => <Login {...props} auth={authProps} />}
+                />
+                <Route
+                  exact
+                  path="/register"
+                  render={(props) => (
+                    <Register
+                      auth={authProps}
+                      {...props}
+                      userProps={this.props}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/home"
+                  render={(props) => <Home auth={authProps} {...props} />}
+                />
+                <Route
+                  exact
+                  path="/userCamera"
+                  render={(props) => <Usercamera auth={authProps} {...props} />}
+                />
+                <Route
+                  exact
+                  path="/gallery"
+                  render={(props) => <Gallery auth={authProps} {...props} />}
+                />
+                <Route
+                  exact
+                  path="/maps"
+                  render={(props) => <Dashboard auth={authProps} {...props} />}
+                />
+                <Route
+                  exact
+                  path="/profile"
+                  render={(props) => <Profile auth={authProps} {...props} />}
+                />
+                <Route
+                  exact
+                  path="/profile/genres"
+                  render={(props) => <Genres auth={authProps} {...props} />}
+                />
+              </Switch>
+            </div>
+dev
           </Router>
-          <div></div>
         </div>
       )
     );
