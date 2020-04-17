@@ -7,6 +7,7 @@ import { APIKey } from "../config.js";
 import Button from "@material-ui/core/Button";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
 class SearchMovie extends Component {
   state = {
@@ -50,27 +51,39 @@ class SearchMovie extends Component {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <TextField
-            id="movie-search"
-            label="Search for a movie"
-            variant="outlined"
-            onChange={this.handleChange}
-          />
-          <Button variant="contained" id="movie-search">
-            <NavigationIcon />
-            Find
-          </Button>
-        </form>
+        <Typography variant="body2" color="text" align="center">
+          <form onSubmit={this.handleSubmit}>
+            <TextField
+              id="movie-search"
+              label="Search for a movie"
+              variant="outlined"
+              onChange={this.handleChange}
+            />
+            <Button variant="contained" id="movie-search">
+              <NavigationIcon />
+              Find
+            </Button>
+          </form>
+        </Typography>
+        <>
+          <br />
+        </>
         {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
-        {/* <div style={{ width: "75%", height: "100vh" }}> */}
         <div
           style={{
+            width: "100%",
+            height: "80vh",
             justifyContent: "center",
-            width: "75%",
-            height: "100vh",
+            alignItems: "center",
           }}
         >
+          {/* <div
+            style={{
+              justifyContent: "center",
+              width: "75%",
+              height: "100vh",
+            }}
+          > */}
           <NewWrappedMap
             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${APIKey}`}
             loadingElement={<div style={{ height: "100%" }} />}

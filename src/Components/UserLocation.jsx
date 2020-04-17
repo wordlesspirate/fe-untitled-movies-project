@@ -68,7 +68,6 @@ class UserLocation extends Component {
           destination={this.props.destination}
           stops={this.props.stops}
         />
-        ;
       </div>
     );
   }

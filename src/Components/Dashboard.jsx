@@ -4,13 +4,21 @@ import Header from "./Header";
 // import WrappedMap from "./MovieMap";
 // import APIKey from "../config";
 import SearchMovie from "./SearchMovie";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
 
 const Dashboard = () => {
   return (
-    <div>
-      <Header />
+    <Container component="main" maxWidth="lg">
+      <CssBaseline />
+      <Typography variant="body2" color="text" align="center">
+        <Header />
+      </Typography>
       <SearchMovie />
-    </div>
+    </Container>
   );
 };
 
