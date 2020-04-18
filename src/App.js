@@ -11,6 +11,7 @@ import Profile from "./Components/Profile";
 import Navbar from "./Components/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth } from "aws-amplify";
+import ViewToggler from "./Components/ViewToggler";
 
 class App extends Component {
   state = {
@@ -58,7 +59,9 @@ class App extends Component {
         <div className={"App"}>
           <Router>
             <div>
-              <Navbar auth={authProps} />
+              <ViewToggler>
+                <Navbar auth={authProps} />
+              </ViewToggler>
               <Switch>
                 <Route
                   exact

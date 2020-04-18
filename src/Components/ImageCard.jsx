@@ -47,7 +47,7 @@ class ImageCard extends Component {
             <img
               alt={"user-img"}
               src={`${image.src}`}
-              style={{ width: "30%" }}
+              style={{ width: "100%" }}
             />
           </SRLWrapper>
         </div>
