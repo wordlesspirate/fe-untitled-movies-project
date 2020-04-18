@@ -9,7 +9,13 @@ import {
 import UserLocation from './UserLocation';
 import * as api from '../Utils/api';
 class NewMovieMap extends Component {
-  state = { coordinate: null, address: null, destination: null, stops: [] };
+  state = {
+    coordinate: null,
+    address: null,
+    destination: null,
+    stops: [],
+    isLoading: false,
+  };
 
   fetchAddress = (coordinate) => {
     api.getAddress(coordinate).then((address) => {

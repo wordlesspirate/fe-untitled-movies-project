@@ -22,44 +22,62 @@ class SearchMovie extends Component {
     coordinates: [],
     movieId: '',
     movieInfo: [],
+    error: null,
+    isLoading: false,
   };
 
   handleClick = (event) => {
-    //this.props.setMovieId(this.state.movieId);
-    getMovieLocationsInfo(this.state.movieId).then((movieInfo) => {
-      this.setState({ movieInfo }, () => {
-        console.log(this.state.movieInfo);
+    getMovieLocationsInfo(this.state.movieId)
+      .then((movieInfo) => {
+        this.setState({ movieInfo });
+      })
+      .catch((error) => {
+        this.setState({ error });
       });
-    });
   };
 
   handleChange = (event) => {
     const { value } = event.target;
-    this.setState({ movieTitle: value }, () => {
-      //console.log(this.state.movieTitle);
-    });
+    this.setState({ movieTitle: value });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
+    this.setState({ isLoading: true });
 
-    getMovieId(this.state.movieTitle).then((movieId) => {
-      this.setState({ movieId });
-      getMovieLocations(movieId).then((addresses) => {
-        // need a promise all,
-        // should resolve when you have all the api data
-        // THEN you can set state
-
-        return Promise.all(
-          addresses.map((address) => api.getLatLng(address))
-        ).then((coords) => {
-          this.setState({ coordinates: coords });
+    getMovieId(this.state.movieTitle)
+      .then((movieId) => {
+        this.setState({ movieId });
+        getMovieLocations(movieId)
+          .then((addresses) => {
+            return Promise.all(
+              addresses.map((address) => api.getLatLng(address))
+            )
+              .then((coords) => {
+                this.setState({ coordinates: coords, isLoading: false });
+              })
+              .catch((error) => {
+                this.setState({ error }, () => {
+                  console.log(this.state.error);
+                });
+              });
+          })
+          .catch((error) => {
+            this.setState({ error }, () => {
+              console.log(this.state.error);
+            });
+          });
+      })
+      .catch((error) => {
+        this.setState({ error }, () => {
+          console.log(this.state.error);
         });
       });
-    });
   };
 
   render() {
+    if (this.state.error)
+      return <p>Oops something's gone wrong. Please try again.</p>;
     return (
       <>
         <Typography variant="body2" color="text" align="center">
@@ -70,7 +88,11 @@ class SearchMovie extends Component {
               variant="outlined"
               onChange={this.handleChange}
             />
-            <Button variant="contained" id="movie-search">
+            <Button
+              variant="contained"
+              id="movie-search"
+              onClick={this.handleSubmit}
+            >
               {/* <NavigationIcon /> */}
               Find
             </Button>
@@ -79,6 +101,9 @@ class SearchMovie extends Component {
             )}
           </form>
         </Typography>
+        {this.state.isLoading && (
+          <p>Please wait while your film locations load</p>
+        )}
         <>
           <br />
         </>

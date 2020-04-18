@@ -1,5 +1,5 @@
-import axios from "axios";
-import { APIKey } from "../config.js";
+import axios from 'axios';
+import { APIKey } from '../config.js';
 
 export const getLatLng = (address) => {
   return axios
@@ -8,6 +8,9 @@ export const getLatLng = (address) => {
     )
     .then(({ data: { results } }) => {
       return results[0].geometry.location;
+    })
+    .catch((error) => {
+      return error;
     });
 };
 
@@ -19,5 +22,8 @@ export const getAddress = (coordinate) => {
     )
     .then(({ data: { results } }) => {
       return results[0].formatted_address;
+    })
+    .catch((error) => {
+      return error;
     });
 };
