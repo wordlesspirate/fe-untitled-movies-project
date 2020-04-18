@@ -1,26 +1,26 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   getMovieId,
   getMovieLocations,
   getMovieLocationsInfo,
-} from "../Utils/movies";
-import * as api from "../Utils/api";
+} from '../Utils/movies';
+import * as api from '../Utils/api';
 // import DisplayMarkers from "./DisplayMarkers";
 
-import NewWrappedMap from "./NewMovieMap";
-import { APIKey } from "../config.js";
-import Button from "@material-ui/core/Button";
-import NavigationIcon from "@material-ui/icons/Navigation";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import MovieCard from "./MovieCard";
-import ViewToggler from "./ViewToggler";
+import NewWrappedMap from './NewMovieMap';
+import { APIKey } from '../config.js';
+import Button from '@material-ui/core/Button';
+// import NavigationIcon from "@material-ui/icons/Navigation";
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import MovieCard from './MovieCard';
+import ViewToggler from './ViewToggler';
 
 class SearchMovie extends Component {
   state = {
-    movieTitle: "",
+    movieTitle: '',
     coordinates: [],
-    movieId: "",
+    movieId: '',
     movieInfo: [],
   };
 
@@ -53,9 +53,7 @@ class SearchMovie extends Component {
         return Promise.all(
           addresses.map((address) => api.getLatLng(address))
         ).then((coords) => {
-          this.setState({ coordinates: coords }, () => {
-            console.log(this.state.movieId);
-          });
+          this.setState({ coordinates: coords });
         });
       });
     });
@@ -73,7 +71,7 @@ class SearchMovie extends Component {
               onChange={this.handleChange}
             />
             <Button variant="contained" id="movie-search">
-              <NavigationIcon />
+              {/* <NavigationIcon /> */}
               Find
             </Button>
             {this.state.movieId && (
@@ -87,10 +85,10 @@ class SearchMovie extends Component {
         {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
         <div
           style={{
-            width: "100%",
-            height: "80vh",
-            justifyContent: "center",
-            alignItems: "center",
+            width: '100%',
+            height: '80vh',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
           {/* <div
@@ -102,20 +100,21 @@ class SearchMovie extends Component {
           > */}
           <NewWrappedMap
             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${APIKey}`}
-            loadingElement={<div style={{ height: "100%" }} />}
-            containerElement={<div style={{ height: "100%" }} />}
-            mapElement={<div style={{ height: "100%" }} />}
+            loadingElement={<div style={{ height: '100%' }} />}
+            containerElement={<div style={{ height: '100%' }} />}
+            mapElement={<div style={{ height: '100%' }} />}
             coordinates={this.state.coordinates}
+            movieInfo={this.state.movieInfo}
           />
 
           {/* </Link> */}
           {/* <DisplayMarkers coordinates={this.state.coordinates} /> */}
         </div>
-        <ViewToggler>
+        {/* <ViewToggler>
           {this.state.movieInfo.map((info) => {
             return <MovieCard key={info.movieLocation} {...info} />;
           })}
-        </ViewToggler>
+        </ViewToggler> */}
       </>
     );
   }
