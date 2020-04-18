@@ -1,4 +1,3 @@
-
 import React from "react";
 import Header from "./Header";
 // import SearchMovie from "./SearchMovie";
@@ -13,13 +12,10 @@ import Typography from "@material-ui/core/Typography";
 
 const Dashboard = () => {
   return (
-    <Container component="main" maxWidth="lg">
-      <CssBaseline />
-      <Typography variant="body2" color="text" align="center">
-        <Header />
-      </Typography>
+    <>
+      <Header />
       <SearchMovie />
-    </Container>
+    </>
   );
 };
 
@@ -47,5 +43,4 @@ const Dashboard = () => {
 //   );
 // };
 
-
- export default Dashboard;
+export default Dashboard;
