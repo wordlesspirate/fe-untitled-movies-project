@@ -8,10 +8,10 @@ import * as api from "../Utils/api";
 // import DisplayMarkers from "./DisplayMarkers";
 import NewWrappedMap from "./NewMovieMap";
 import { APIKey } from "../config.js";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import { Container } from "@material-ui/core/";
 import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import MovieCard from "./MovieCard";
 import ViewToggler from "./ViewToggler";
 
@@ -20,9 +20,12 @@ import ViewToggler from "./ViewToggler";
 import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
-import theme from "./theme";
 
 const useStyles = (theme) => ({
+  background: {
+    backgroundColor: theme.background.option1.lightBlue,
+  },
+
   root: {
     "& > *": {
       margin: theme.spacing(2),
@@ -105,7 +108,7 @@ class SearchMovie extends Component {
               />
               <Fab variant="extended" id="movie-search">
                 <NavigationIcon className={classes.extendedIcon} />
-                Find Movie
+                Submit
               </Fab>
               {/* <Button variant="contained" id="movie-search">
             <NavigationIcon />

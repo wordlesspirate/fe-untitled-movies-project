@@ -4,13 +4,21 @@ import Header from "./Header";
 // import WrappedMap from "./MovieMap";
 // import APIKey from "../config";
 import SearchMovie from "./SearchMovie";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
+// import Paper from "@material-ui/core/Paper";
+// import Grid from "@material-ui/core/Grid";
+// import Container from "@material-ui/core/Container";
+// import CssBaseline from "@material-ui/core/CssBaseline";
+// import Typography from "@material-ui/core/Typography";
+// import { withStyles } from "@material-ui/core/styles";
+
+// const useStyles = (theme) => ({
+//   background: {
+//     backgroundColor: theme.background.option1.lightBlue,
+//   },
+// });
 
 const Dashboard = () => {
+  // const { classes } = useStyles();
   return (
     <>
       <Header />
@@ -42,5 +50,7 @@ const Dashboard = () => {
 //     </div>
 //   );
 // };
+
+// export default withStyles(useStyles)(Dashboard);
 
 export default Dashboard;
