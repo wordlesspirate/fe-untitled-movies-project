@@ -23,33 +23,6 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
 const useStyles = (theme) => ({
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-    alignItems: "center",
-  },
-  card: {
-    height: "100%",
-    width: "25%",
-    display: "flex",
-    flexDirection: "column",
-  },
-  cardMedia: {
-    height: 140,
-  },
-  cardContent: {
-    flexGrow: 1,
-  },
-  account: {
-    marginTop: theme.spacing(4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
   root: {
     display: "flex",
     "& > *": {
@@ -61,6 +34,33 @@ const useStyles = (theme) => ({
   large: {
     width: theme.spacing(7),
     height: theme.spacing(7),
+  },
+  account: {
+    marginTop: theme.spacing(4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+  },
+  cardMedia: {
+    // paddingTop: "56.25%",
+    // height: "50%",
+    // width: "50%",
+  },
+  cardContent: {
+    flexGrow: 1,
   },
 });
 
@@ -172,7 +172,7 @@ class Profile extends React.Component {
             >
               Favorite Genres
             </Typography>
-            <Grid container spacing={4}>
+            <Grid container spacing={4} alignItems="center">
               {cards.map((card, index) => (
                 <Grid item key={index} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
@@ -203,62 +203,6 @@ class Profile extends React.Component {
             </Grid>
           </Container>
         </main>
-
-        {/* <section className={"profile-avatar"}>
-          {!avatar_url ? (
-            <img
-              className={"profileimg"}
-              alt="users-avatar"
-              src="https://img.icons8.com/ios/100/fa314a/comedy.png"
-            />
-          ) : (
-            <img alt="users-avatar" src={`${avatar_url}`} />
-          )}
-
-          <label htmlFor="profileimg">{this.state.username}</label>
-        </section>
-
-        <section className="profile-genres">
-          <h2>Your favourite genres</h2>
-          <div>
-            {genre1}
-            {!g1_avatar ? (
-              <img
-                className={"g-avatar"}
-                alt="users-avatar"
-                src="https://img.icons8.com/ios/100/fa314a/comedy.png"
-              />
-            ) : (
-              <img alt="genre-avatar" src={g1_avatar} />
-            )}
-          </div>
-
-          <div>
-            {genre2}
-            {!g2_avatar ? (
-              <img
-                className={"g-avatar"}
-                alt="users-avatar"
-                src="https://img.icons8.com/ios/100/fa314a/comedy.png"
-              />
-            ) : (
-              <img alt="users-avatar" src={g2_avatar} />
-            )}
-          </div>
-          <div>
-            {genre3}
-            {!g3_avatar ? (
-              <img
-                className={"g-avatar"}
-                alt="users-avatar"
-                src="https://img.icons8.com/ios/100/fa314a/comedy.png"
-              />
-            ) : (
-              <img alt="users-avatar" src={g3_avatar} />
-            )}
-          </div>
-          <a href="/profile/genres">Change your favourite genres </a>
-        </section> */}
       </>
     );
   }
