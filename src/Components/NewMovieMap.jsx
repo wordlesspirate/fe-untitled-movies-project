@@ -51,11 +51,15 @@ class NewMovieMap extends Component {
     });
   };
   componentDidMount() {
+    //this.setState({isLoading:true})
     this.displayMarkers();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.coordinates !== prevProps.coordinates) this.displayMarkers();
+    if (this.props.coordinates !== prevProps.coordinates) {
+      // this.setState({isLoading:true})
+      this.displayMarkers();
+    }
   }
 
   render() {

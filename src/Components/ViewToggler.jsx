@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class ViewToggler extends Component {
-  state = { isVisible: true };
+  state = { isVisible: false };
 
   handleClick = (event) => {
     this.setState((currentState) => {

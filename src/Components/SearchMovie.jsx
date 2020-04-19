@@ -24,6 +24,7 @@ class SearchMovie extends Component {
     movieInfo: [],
     error: null,
     isLoading: false,
+    fieldError: false,
   };
 
   handleClick = (event) => {
@@ -43,50 +44,57 @@ class SearchMovie extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.setState({ isLoading: true });
+    if (!this.state.movieTitle.length) {
+      this.setState({ fieldError: true });
+    } else {
+      this.setState({ isLoading: true, fieldError: false, error: false });
 
-    getMovieId(this.state.movieTitle)
-      .then((movieId) => {
-        this.setState({ movieId });
-        getMovieLocations(movieId)
-          .then((addresses) => {
-            return Promise.all(
-              addresses.map((address) => api.getLatLng(address))
-            )
-              .then((coords) => {
-                this.setState({ coordinates: coords, isLoading: false });
-              })
-              .catch((error) => {
-                this.setState({ error }, () => {
-                  console.log(this.state.error);
+      getMovieId(this.state.movieTitle)
+        .then((movieId) => {
+          this.setState({ movieId });
+          getMovieLocations(movieId)
+            .then((addresses) => {
+              return Promise.all(
+                addresses.map((address) => api.getLatLng(address))
+              )
+                .then((coords) => {
+                  this.setState({ coordinates: coords, isLoading: false });
+                })
+                .catch((error) => {
+                  this.setState({ error }, () => {
+                    console.log(this.state.error);
+                  });
                 });
+            })
+            .catch((error) => {
+              this.setState({ error }, () => {
+                console.log(this.state.error);
               });
-          })
-          .catch((error) => {
-            this.setState({ error }, () => {
-              console.log(this.state.error);
             });
+        })
+        .catch((error) => {
+          this.setState({ error }, () => {
+            console.log(this.state.error);
           });
-      })
-      .catch((error) => {
-        this.setState({ error }, () => {
-          console.log(this.state.error);
         });
-      });
+    }
   };
 
   render() {
-    if (this.state.error)
-      return <p>Oops something's gone wrong. Please try again.</p>;
+    // if (this.state.error)
+    //   return <p>Oops something's gone wrong. Please try again.</p>;
+
     return (
       <>
         <Typography variant="body2" color="text" align="center">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} required={true}>
             <TextField
               id="movie-search"
               label="Search for a movie"
               variant="outlined"
               onChange={this.handleChange}
+              required={true}
+              error={this.state.fieldError}
             />
             <Button
               variant="contained"
@@ -96,13 +104,16 @@ class SearchMovie extends Component {
               {/* <NavigationIcon /> */}
               Find
             </Button>
-            {this.state.movieId && (
+            {this.state.movieId && !this.state.error && (
               <button onClick={this.handleClick}>View Movie Info</button>
             )}
           </form>
         </Typography>
-        {this.state.isLoading && (
+        {this.state.isLoading && !this.state.error && (
           <p>Please wait while your film locations load</p>
+        )}
+        {this.state.error && (
+          <p>There has been an error finding your film, please try again</p>
         )}
         <>
           <br />

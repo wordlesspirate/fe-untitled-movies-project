@@ -91,6 +91,7 @@ class RouteCalculator extends Component {
         <ViewTogglerDirections>
           {this.state.textDirections && <div id="panel"></div>}
         </ViewTogglerDirections>
+
         <ViewToggler>
           {this.state.movieInfo &&
             this.state.movieInfo.map((info) => {

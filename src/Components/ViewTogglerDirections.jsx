@@ -13,8 +13,8 @@ class ViewTogglerDirections extends Component {
       <>
         <button onClick={this.handleClick}>
           {this.state.isVisible
-            ? 'Hide text directions'
-            : 'Show text directions'}
+            ? 'Show text directions'
+            : 'Hide text directions'}
         </button>
         {this.state.isVisible && this.props.children}
       </>
