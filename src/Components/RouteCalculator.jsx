@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   // GoogleMap,
   // Marker,
   // DirectionsService,
   DirectionsRenderer,
   // LatLng,
-} from 'react-google-maps';
-import ViewToggler from './ViewToggler';
-import MovieCard from './MovieCard';
-import ViewTogglerDirections from './ViewTogglerDirections';
+} from "react-google-maps";
+import ViewToggler from "./ViewToggler";
+import MovieCard from "./MovieCard";
+import ViewTogglerDirections from "./ViewTogglerDirections";
+import ViewTogglerInfo from "./ViewTogglerInfo";
 
 class RouteCalculator extends Component {
   state = {
@@ -59,7 +60,7 @@ class RouteCalculator extends Component {
               location: new window.google.maps.LatLng(stop.lat, stop.lng),
             };
           }),
-          travelMode: 'DRIVING',
+          travelMode: "DRIVING",
           optimizeWaypoints: true,
         },
         (result, status) => {
@@ -72,7 +73,7 @@ class RouteCalculator extends Component {
               // polyline: result.routes[0].overview_polyline,
             });
           } else {
-            console.dir('console.dir', result);
+            console.dir("console.dir", result);
           }
         }
       );
@@ -85,19 +86,19 @@ class RouteCalculator extends Component {
         {this.state.directions && (
           <DirectionsRenderer
             defaultDirections={this.state.directions}
-            panel={document.getElementById('panel')}
+            panel={document.getElementById("panel")}
           />
         )}
         <ViewTogglerDirections>
           {this.state.textDirections && <div id="panel"></div>}
         </ViewTogglerDirections>
 
-        <ViewToggler>
+        <ViewTogglerInfo>
           {this.state.movieInfo &&
             this.state.movieInfo.map((info) => {
               return <MovieCard key={info.movieLocation} {...info} />;
             })}
-        </ViewToggler>
+        </ViewTogglerInfo>
       </div>
     );
   }

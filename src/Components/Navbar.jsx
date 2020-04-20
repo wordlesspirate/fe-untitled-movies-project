@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import { BrowserRouter as useHistory } from "react-router-dom";
@@ -53,11 +52,6 @@ class Navbar extends Component {
 
       history.push("/");
       this.props.hideNav(true);
-
-        //below bit?
-      history.push('/');
-        //above?
-
     } catch (error) {
       console.dir(error);
       console.log(error);
@@ -74,7 +68,7 @@ class Navbar extends Component {
             Home
           </Link>
           <Link color="secondary" href="/maps">
-            Dashboard
+            Map
           </Link>
           <Link color="secondary" href="/userCamera">
             Camera
@@ -85,11 +79,9 @@ class Navbar extends Component {
           <Link color="secondary" href="/profile">
             Profile
           </Link>
-          {this.props.auth.isAuthenticated ? (
-            <Link color="secondary" href="/" onClick={this.handleLogOut}>
-              Profile
-            </Link>
-          ) : null}
+          <Link color="secondary" href="/" onClick={this.handleLogOut}>
+            Log Out
+          </Link>
         </div>
       </Container>
     );
