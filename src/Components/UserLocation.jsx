@@ -58,7 +58,7 @@ class UserLocation extends Component {
           <Marker
             position={this.state}
             icon={{
-              url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+              url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
             }}
           />
         }
@@ -67,6 +67,7 @@ class UserLocation extends Component {
           movieLocations={this.props.coordinates}
           destination={this.props.destination}
           stops={this.props.stops}
+          movieInfo={this.props.movieInfo}
         />
       </div>
     );

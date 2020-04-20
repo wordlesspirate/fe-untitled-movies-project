@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button } from "@material-ui/core";
 import MenuOutlinedIcon from "@material-ui/icons/MenuOutlined";
 class ViewToggler extends Component {
-  state = { isVisible: true };
+  state = { isVisible: false };
 
   handleClick = (event) => {
     this.setState((currentState) => {

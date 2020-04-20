@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Auth } from "aws-amplify";
-import { BrowserRouter as useHistory } from "react-router-dom";
+import React, { Component } from 'react';
+import { Auth } from 'aws-amplify';
+import { BrowserRouter as useHistory } from 'react-router-dom';
 
 class Navbar extends Component {
   handleLogOut = async (event) => {
@@ -10,7 +10,7 @@ class Navbar extends Component {
       Auth.signOut();
       this.props.auth.setAuthenticated(false);
       this.props.auth.userInfo(null);
-      history.push("/");
+      history.push('/');
     } catch (error) {
       console.dir(error);
       console.log(error);
@@ -23,7 +23,7 @@ class Navbar extends Component {
       <nav className="navbar" role="navigation">
         <div>
           <a href="/home">Home</a>
-          <a href="/maps">Dashboard</a>
+          <a href="/maps">Map</a>
           <a href="/userCamera">Camera</a>
           <a href="/gallery">Gallery</a>
           <a href="/profile">My Profile</a>

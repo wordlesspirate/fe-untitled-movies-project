@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import "./App.css";
 import Dashboard from "./Components/Dashboard";
@@ -12,6 +13,7 @@ import Navbar from "./Components/Navbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import ViewToggler from "./Components/ViewToggler";
+
 
 class App extends Component {
   state = {
@@ -56,14 +58,18 @@ class App extends Component {
 
     return (
       !this.state.isAuthenticating && (
-        <div className={"App"}>
+        <div className={'App'}>
           <Router>
             <div>
+
               <ViewToggler>
                 <Navbar auth={authProps} />
               </ViewToggler>
-              <Switch>
-                <Route
+            
+
+             
+              <Switch primary={false}>
+    <Route
                   exact
                   path="/"
                   render={(props) => <Login {...props} auth={authProps} />}

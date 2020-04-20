@@ -2,6 +2,71 @@ import React from "react";
 import axios from "axios";
 import config from "../config.json";
 import ErrorHandler from "./ErrorHandler";
+// items for movies genres to display in grid
+import AppBar from "@material-ui/core/AppBar";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { withStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Link from "@material-ui/core/Link";
+
+const useStyles = (theme) => ({
+  root: {
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  large: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
+  account: {
+    marginTop: theme.spacing(4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(8, 0, 6),
+  },
+  cardGrid: {
+    paddingTop: theme.spacing(8),
+    paddingBottom: theme.spacing(8),
+  },
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: 322,
+  },
+  media: {
+    width: 322,
+    height: 322,
+    objectFit: "contain",
+  },
+  cardContent: {
+    flexGrow: 1,
+  },
+  submit: {
+    margin: theme.spacing(3, 8, 2),
+  },
+  submitbutton: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+});
 
 class Genres extends React.Component {
   state = {
@@ -147,38 +212,76 @@ class Genres extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
+
+    const cards = this.state.genres;
+    console.log("are they all listed", cards);
+
     return (
       <>
-        <div>
-          <h1>Pick Your Favourites</h1>
-          <ErrorHandler
-            apierrors={this.state.error}
-            success={this.state.success}
-          />
+        <CssBaseline />
+        <AppBar position="relative">
+          <Toolbar>
+            <Typography variant="h6" color="inherit" noWrap>
+              Navbar goes here
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <ErrorHandler
+          apierrors={this.state.error}
+          success={this.state.success}
+        />
+        <main>
+          <Container className={classes.cardGrid} spacing={2}>
+            <Typography
+              component="h4"
+              variant="h4"
+              align="center"
+              color="textSecondary"
+              gutterBottom
+            >
+              Pick your favourites
+            </Typography>
 
-          <main>
-            <div className={"genre-selection"} disabled={this.state.i > 2}>
+            <Grid
+              container
+              spacing={4}
+              alignItems="center"
+              disabled={this.state.i > 2}
+            >
               {this.state.genres.map(({ genre, g_avatar }, i) => {
                 return (
-                  <button
-                    //disabled={this.num === 4}
-                    onClick={this.selectGenre}
-                    key={i}
-                  >
-                    {genre}
-
-                    <img name={genre} alt="genre-avatar" src={g_avatar} />
-                  </button>
+                  <Grid item key={i} xs={12} sm={6} md={4}>
+                    <Button onClick={this.selectGenre} key={i}>
+                      <Card className={classes.card}>
+                        <CardMedia
+                          className={classes.media}
+                          component="img"
+                          alt=""
+                          image={g_avatar}
+                          title=""
+                        />
+                        <CardContent className={classes.cardContent}>
+                          <Typography
+                            gutterBottom
+                            variant="subtitle2"
+                            align="justify"
+                          >
+                            {genre}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </Button>
+                  </Grid>
                 );
               })}
-
               <button onClick={this.saveGenres}>Save</button>
-            </div>
-          </main>
-        </div>
+            </Grid>
+          </Container>
+        </main>
       </>
     );
   }
 }
 
-export default Genres;
+export default withStyles(useStyles)(Genres);
