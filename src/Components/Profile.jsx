@@ -24,6 +24,12 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 
 const useStyles = (theme) => ({
+  paper: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
   root: {
     display: "flex",
     "& > *": {
@@ -43,7 +49,7 @@ const useStyles = (theme) => ({
     alignItems: "center",
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
     padding: theme.spacing(8, 0, 6),
   },
   cardGrid: {
@@ -56,7 +62,7 @@ const useStyles = (theme) => ({
     flexDirection: "column",
     maxWidth: 322,
   },
-  media: {
+  cardMedia: {
     width: 322,
     height: 322,
     objectFit: "contain",
@@ -131,16 +137,9 @@ class Profile extends React.Component {
       <>
         <ErrorHandler apierrors={this.state.error} />
         <CssBaseline />
-        <AppBar position="relative">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Navbar goes here
-            </Typography>
-          </Toolbar>
-        </AppBar>
         <main>
-          <div className={classes.heroContent}>
-            <Container maxWidth="xs">
+          <div className={classes.paper}>
+            <Container maxWidth="sm">
               <Typography
                 component="h4"
                 variant="h4"
@@ -174,30 +173,32 @@ class Profile extends React.Component {
             >
               Favorite Genres
             </Typography>
-            <Grid container spacing={4}>
-              {cards.map((card, index) => (
-                <Grid item key={index} xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.media}
-                      component="img"
-                      alt=""
-                      image={card.image}
-                      title=""
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography
-                        gutterBottom
-                        variant="subtitle2"
-                        align="justify"
-                      >
-                        {card.genre}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
+            <div className={classes.paper}>
+              <Grid container spacing={1} justify="center">
+                {cards.map((card, index) => (
+                  <Grid item key={index} md={3}>
+                    <Card className={classes.card}>
+                      <CardMedia
+                        className={classes.cardMedia}
+                        component="img"
+                        alt=""
+                        image={card.image}
+                        title=""
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography
+                          gutterBottom
+                          variant="subtitle2"
+                          align="justify"
+                        >
+                          {card.genre}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
             <Grid item className={classes.account}>
               <Link href="/profile/genres" variant="body2">
                 {"Edit Genres"}
