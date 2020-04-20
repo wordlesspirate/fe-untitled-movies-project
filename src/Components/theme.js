@@ -2,12 +2,12 @@ import { createMuiTheme } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   palette: {
-
     primary: { 500: "#FFFFFF" },
     secondary: { A400: "#FFFFFF" },
     third: { A400: "#FFFFFF" },
     background: {
-      default: "#A8D0DB",
+      // default: "#A8D0DB",
+      default: "#FFFFFF",
     },
 
     primary: { 500: "#5E548E" },
@@ -17,7 +17,6 @@ const theme = createMuiTheme({
     option3: { white: "FFFFFF" },
     option4: { purple: "#5E548E" },
     option5: { black: "#041B15" },
-
   },
   status: {
     danger: "orange",
