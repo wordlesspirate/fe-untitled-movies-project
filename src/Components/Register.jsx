@@ -2,7 +2,6 @@ import React from "react";
 import { Auth } from "aws-amplify";
 import axios from "axios";
 import config from "../config.json";
-import ErrorHandler from "./ErrorHandler";
 
 import {
   Button,
@@ -11,7 +10,7 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
-
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = (theme) => ({
@@ -149,9 +148,17 @@ class Register extends React.Component {
     const { classes } = this.props;
     return (
       <Container component="main" maxWidth="xs">
+        <CssBaseline />
         <div className={classes.paper}>
+
+        //repeated code
+        // >>>
           <ErrorHandler formerrors={this.state.errors} />
           <Typography component="h6" variant="h2">
+
+          <Typography color="primary" component="h6" variant="h2">
+          //<<<<
+
             Sign up
           </Typography>
           <form onSubmit={this.handleSubmit} className={classes.form}>
@@ -213,7 +220,12 @@ class Register extends React.Component {
                 />
               </Grid>
               <Grid className={classes.submitButton} item xs={12}>
-                <Button variant="contained" color="primary" type="submit">
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                >
                   Sign up
                 </Button>
               </Grid>

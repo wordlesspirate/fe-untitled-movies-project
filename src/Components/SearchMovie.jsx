@@ -163,6 +163,7 @@ class SearchMovie extends Component {
 
   render() {
 
+
     // if (this.state.error)
     //   return <p>Oops something's gone wrong. Please try again.</p>;
 
@@ -170,33 +171,50 @@ class SearchMovie extends Component {
       <>
         <Typography variant="body2" color="text" align="center">
           <form onSubmit={this.handleSubmit} required={true}>
+
+<!--           think above is correct -->
+<!--     return (
+      <>
+        <Typography variant="body2" color="text" align="center">
+          <form onSubmit={this.handleSubmit}> -->
+
             <TextField
               id="movie-search"
               label="Search for a movie"
               variant="outlined"
               onChange={this.handleChange}
+
               required={true}
               error={this.state.fieldError}
             />
             <Button variant="contained" id="movie-search">
 
-              //this might be the one that works?
+<!--               //below might be the one that works? -->
             <Button
               variant="contained"
               id="movie-search"
               onClick={this.handleSubmit}
              
             >
-              //above bit I think works
+<!--               //above bit I think works -->
 
               {/* <NavigationIcon /> */}
               Find
             </Button>
             {this.state.movieId && !this.state.error && (
+
+            />
+//              check below and compare to above
+            <Button variant="contained" id="movie-search">
+              {/* <NavigationIcon /> */}
+              Find
+            </Button>
+
               <button onClick={this.handleClick}>View Movie Info</button>
             )}
           </form>
         </Typography>
+
         {this.state.isLoading && !this.state.error && (
           <p>Please wait while your film locations load</p>
         )}
@@ -205,6 +223,7 @@ class SearchMovie extends Component {
         )}
 
 // <<<<<<< Dashboard
+
 //     const { classes } = this.props;
 
 //     return (
@@ -233,7 +252,7 @@ class SearchMovie extends Component {
 //             </form>
 //           </div>
 //         </Container>
-// 
+
 //     // if (this.state.error)
 //     //   return <p>Oops something's gone wrong. Please try again.</p>;
 
@@ -268,7 +287,9 @@ class SearchMovie extends Component {
 //         {this.state.error && (
 //           <p>There has been an error finding your film, please try again</p>
 //         )}
+
 // >>>>>>> dev
+
 
         <>
           <br />
