@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 
-class ViewToggler extends Component {
-  state = { isVisible: false };
+class ViewTogglerDirections extends Component {
+  state = { isVisible: true };
 
   handleClick = (event) => {
     this.setState((currentState) => {
       return { isVisible: !currentState.isVisible };
     });
   };
-
   render() {
     return (
       <>
         <button onClick={this.handleClick}>
           {this.state.isVisible
-            ? 'Hide movie information'
-            : 'Show movie information'}
+            ? 'Show text directions'
+            : 'Hide text directions'}
         </button>
         {this.state.isVisible && this.props.children}
       </>
@@ -23,4 +22,4 @@ class ViewToggler extends Component {
   }
 }
 
-export default ViewToggler;
+export default ViewTogglerDirections;
