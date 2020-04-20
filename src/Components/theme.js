@@ -5,8 +5,9 @@ const theme = createMuiTheme({
 
     primary: { 500: "#FFFFFF" },
     secondary: { A400: "#FFFFFF" },
+    third: { A400: "#FFFFFF" },
     background: {
-      default: "#5E548E",
+      default: "#A8D0DB",
     },
 
     primary: { 500: "#5E548E" },

@@ -36,6 +36,9 @@ const useStyles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
+  input: {
+    backgroundColor: "white",
+  },
 });
 
 class Register extends React.Component {
@@ -165,6 +168,9 @@ class Register extends React.Component {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  InputProps={{
+                    className: classes.input,
+                  }}
                   autoComplete="username"
                   name="username"
                   variant="outlined"
@@ -179,6 +185,9 @@ class Register extends React.Component {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  InputProps={{
+                    className: classes.input,
+                  }}
                   value={this.state.email}
                   onChange={this.handleChange}
                   variant="outlined"
@@ -193,6 +202,9 @@ class Register extends React.Component {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  InputProps={{
+                    className: classes.input,
+                  }}
                   value={this.state.password}
                   onChange={this.handleChange}
                   variant="outlined"
@@ -207,6 +219,9 @@ class Register extends React.Component {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  InputProps={{
+                    className: classes.input,
+                  }}
                   value={this.state.name}
                   onChange={this.handleChange}
                   variant="outlined"

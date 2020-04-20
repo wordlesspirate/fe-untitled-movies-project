@@ -37,9 +37,9 @@ class ImageCard extends Component {
 
   render() {
     if (this.state.isLoading) return "Loading ....";
+    const image = new Image();
+    image.src = this.state.img;
     if (!this.state.isLoading) {
-      const image = new Image();
-      image.src = this.state.img;
       return (
         <div>
           <ErrorHandler apierrors={this.state.error} />

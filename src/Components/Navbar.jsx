@@ -1,6 +1,46 @@
-import React, { Component } from 'react';
-import { Auth } from 'aws-amplify';
-import { BrowserRouter as useHistory } from 'react-router-dom';
+
+import React, { Component } from "react";
+import { Auth } from "aws-amplify";
+import { BrowserRouter as useHistory } from "react-router-dom";
+import "typeface-roboto";
+import { Link, Container } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+const useStyles = (theme) => ({
+  paper: {
+    marginTop: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 8, 2),
+  },
+  submitbutton: {
+    marginTop: theme.spacing(2),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  account: {
+    marginTop: theme.spacing(1),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  root: {
+    color: "white",
+  },
+  input: {
+    color: "white",
+  },
+});
 
 class Navbar extends Component {
   handleLogOut = async (event) => {
@@ -26,20 +66,33 @@ class Navbar extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <nav className="navbar" role="navigation">
-        <div>
-          <a href="/home">Home</a>
-          <a href="/maps">Map</a>
-          <a href="/userCamera">Camera</a>
-          <a href="/gallery">Gallery</a>
-          <a href="/profile">My Profile</a>
-          <a href="/" onClick={this.handleLogOut}>
-            Log out
-          </a>
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Link color="secondary" href="/home">
+            Home
+          </Link>
+          <Link color="secondary" href="/maps">
+            Dashboard
+          </Link>
+          <Link color="secondary" href="/userCamera">
+            Camera
+          </Link>
+          <Link color="secondary" href="/gallery">
+            Gallery
+          </Link>
+          <Link color="secondary" href="/profile">
+            Profile
+          </Link>
+          {this.props.auth.isAuthenticated ? (
+            <Link color="secondary" href="/" onClick={this.handleLogOut}>
+              Profile
+            </Link>
+          ) : null}
         </div>
-      </nav>
+      </Container>
     );
   }
 }
-export default Navbar;
+export default withStyles(useStyles)(Navbar);
