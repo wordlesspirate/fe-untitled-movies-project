@@ -10,7 +10,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = (theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(2),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -69,7 +69,7 @@ class Gallery extends Component {
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item xs={12}>
                 <Typography color="primary" component="h6" variant="h2">
                   Gallery

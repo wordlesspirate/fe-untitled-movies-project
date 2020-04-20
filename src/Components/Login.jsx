@@ -44,11 +44,8 @@ const useStyles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  root: {
-    color: "white",
-  },
   input: {
-    color: "white",
+    backgroundColor: "white",
   },
 });
 
@@ -107,7 +104,7 @@ class Login extends React.Component {
             onSubmit={this.handleSubmit}
             noValidate
           >
-            {/* <ErrorHandler formerrors={this.state.errors} /> */}
+            <ErrorHandler formerrors={this.state.errors} />
             <Typography color="primary" component="h6" variant="h2">
               Sign in ...
             </Typography>
@@ -131,6 +128,9 @@ class Login extends React.Component {
 
             <TextField
               variant="outlined"
+              InputProps={{
+                className: classes.input,
+              }}
               margin="normal"
               required
               fullWidth
