@@ -3,6 +3,7 @@ import axios from "axios";
 import config from "../config.json";
 import Avatar from "@material-ui/core/Avatar";
 import ErrorHandler from "./ErrorHandler";
+
 import "../App.css";
 // Remove below import?
 // import { Link } from "@reach/router";

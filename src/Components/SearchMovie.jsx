@@ -18,6 +18,7 @@ import * as api from '../Utils/api';
 // =======
 
 
+
 import NewWrappedMap from "./NewMovieMap";
 import { APIKey } from "../config.js";
 import Button from "@material-ui/core/Button";
@@ -26,6 +27,17 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import MovieCard from "./MovieCard";
 import ViewToggler from "./ViewToggler";
+
+        //repeated?
+<!-- import NewWrappedMap from './NewMovieMap';
+import { APIKey } from '../config.js';
+import Button from '@material-ui/core/Button';
+// import NavigationIcon from "@material-ui/icons/Navigation";
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import MovieCard from './MovieCard';
+import ViewToggler from './ViewToggler'; -->
+
 
 // import NewWrappedMap from './NewMovieMap';
 // import { APIKey } from '../config.js';
@@ -151,25 +163,66 @@ class SearchMovie extends Component {
 
   render() {
 
+
+    // if (this.state.error)
+    //   return <p>Oops something's gone wrong. Please try again.</p>;
+
     return (
       <>
         <Typography variant="body2" color="text" align="center">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} required={true}>
+
+<!--           think above is correct -->
+<!--     return (
+      <>
+        <Typography variant="body2" color="text" align="center">
+          <form onSubmit={this.handleSubmit}> -->
+
             <TextField
               id="movie-search"
               label="Search for a movie"
               variant="outlined"
               onChange={this.handleChange}
+
+              required={true}
+              error={this.state.fieldError}
             />
+            <Button variant="contained" id="movie-search">
+
+<!--               //below might be the one that works? -->
+            <Button
+              variant="contained"
+              id="movie-search"
+              onClick={this.handleSubmit}
+             
+            >
+<!--               //above bit I think works -->
+
+              {/* <NavigationIcon /> */}
+              Find
+            </Button>
+            {this.state.movieId && !this.state.error && (
+
+            />
+//              check below and compare to above
             <Button variant="contained" id="movie-search">
               {/* <NavigationIcon /> */}
               Find
             </Button>
-            {this.state.movieId && (
+
               <button onClick={this.handleClick}>View Movie Info</button>
             )}
           </form>
         </Typography>
+
+        {this.state.isLoading && !this.state.error && (
+          <p>Please wait while your film locations load</p>
+        )}
+        {this.state.error && (
+          <p>There has been an error finding your film, please try again</p>
+        )}
+
+// <<<<<<< Dashboard
 
 //     const { classes } = this.props;
 
@@ -234,6 +287,8 @@ class SearchMovie extends Component {
 //         {this.state.error && (
 //           <p>There has been an error finding your film, please try again</p>
 //         )}
+
+// >>>>>>> dev
 
 
         <>

@@ -110,36 +110,15 @@ class Genres extends React.Component {
       console.log(num);
       if (num === 1) {
         this.setState({ genre1: genre, g1_avatar: avatar, num: 2 });
-        console.log(
-          this.state.genre1,
-          this.state.g1_avatar,
-          "after setstate 1",
-          num,
-          "num"
-        );
       }
 
       if (num === 2) {
         this.setState({ genre2: genre, g2_avatar: avatar, num: 3 });
-        console.log(
-          this.state.genre2,
-          this.state.g2_avatar,
-          "after setstate 2",
-          num,
-          "num"
-        );
       }
 
       if (num === 3) {
         console.log(num, "num in this");
         this.setState({ genre3: genre, g3_avatar: avatar, num: 4 });
-        console.log(
-          this.state.genre3,
-          this.state.g3_avatar,
-          "after setstate 3",
-          num,
-          "num"
-        );
       }
     }
   };
@@ -147,9 +126,6 @@ class Genres extends React.Component {
   saveGenres = () => {
     const { genre1, genre2, genre3 } = this.state;
     if (genre1 === "" || genre2 === "" || genre3 === "") {
-      console.log(genre1, "g1,", genre2, "g2", genre3, "g3");
-
-      console.log("select another movie");
     } else {
       this.updateProfile();
       console.log(this.state.genre1, this.state.genre2, this.state.genre3);
