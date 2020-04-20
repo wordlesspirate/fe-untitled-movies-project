@@ -106,17 +106,9 @@ class Login extends React.Component {
             onSubmit={this.handleSubmit}
             noValidate
           >
-
             <ErrorHandler formerrors={this.state.errors} />
-
-
-        //which is needed?
-            <Typography component="h6" variant="h2">
-
-            {/* <ErrorHandler formerrors={this.state.errors} /> */}           //this one? -->
-
+            <ErrorHandler formerrors={this.state.errors} />
             <Typography color="primary" component="h6" variant="h2">
-
               Sign in ...
             </Typography>
             <TextField
