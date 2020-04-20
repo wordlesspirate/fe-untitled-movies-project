@@ -13,6 +13,7 @@ import {
   Container,
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 const useStyles = (theme) => ({
   paper: {
@@ -42,6 +43,12 @@ const useStyles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  root: {
+    color: "white",
+  },
+  input: {
+    color: "white",
   },
 });
 
@@ -92,6 +99,7 @@ class Login extends React.Component {
     const { classes } = this.props;
     return (
       <Container component="main" maxWidth="xs">
+        <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}></Avatar>
           <form
@@ -100,10 +108,14 @@ class Login extends React.Component {
             noValidate
           >
             {/* <ErrorHandler formerrors={this.state.errors} /> */}
-            <Typography component="h6" variant="h2">
+            <Typography color="primary" component="h6" variant="h2">
               Sign in ...
             </Typography>
             <TextField
+              className={classes.root}
+              InputProps={{
+                className: classes.input,
+              }}
               variant="outlined"
               margin="normal"
               name="username"
@@ -131,7 +143,12 @@ class Login extends React.Component {
               autoComplete="current-password"
             />
             <Grid item className={classes.submitbutton}>
-              <Button variant="contained" color="primary" type="submit">
+              <Button
+                variant="contained"
+                fullWidth
+                color="primary"
+                type="submit"
+              >
                 Login
               </Button>
             </Grid>

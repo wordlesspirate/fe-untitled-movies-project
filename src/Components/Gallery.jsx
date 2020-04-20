@@ -1,9 +1,25 @@
 import React, { Component } from "react";
 import ImageCard from "./ImageCard";
 import ErrorHandler from "./ErrorHandler";
-const aws = require("aws-sdk");
+import aws from "aws-sdk";
+import config from "../config.json";
+import "typeface-roboto";
+import { Grid, Typography, Container } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { withStyles } from "@material-ui/core/styles";
 
-const config = require("../config.json");
+const useStyles = (theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+});
 
 class Gallery extends Component {
   state = {
@@ -46,32 +62,35 @@ class Gallery extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     if (this.state.isLoading) return "Loading ....";
     if (!this.state.isLoading) {
       return (
-        <>
-          <div>
-            <h1>Gallery</h1>
-            <div>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Typography color="primary" component="h6" variant="h2">
+                  Gallery
+                </Typography>
+              </Grid>
               {this.state.userPics.length === 0
                 ? "You have not snapped any shots!"
                 : ""}
-            </div>
-            <ErrorHandler apierrors={this.state.error} />
-            <ul>
+              <ErrorHandler apierrors={this.state.error} />
               {this.state.userPics.map((item) => {
                 return (
-                  <li key={item.Key}>
+                  <Grid item xs={6}>
                     <ImageCard imageKey={item.Key} />
-                  </li>
+                  </Grid>
                 );
               })}
-            </ul>
+            </Grid>
           </div>
-        </>
+        </Container>
       );
     }
   }
 }
-
-export default Gallery;
+export default withStyles(useStyles)(Gallery);

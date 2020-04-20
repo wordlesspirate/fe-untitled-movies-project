@@ -17,6 +17,16 @@ import * as api from '../Utils/api';
 // import ViewToggler from "./ViewToggler";
 // =======
 
+
+import NewWrappedMap from "./NewMovieMap";
+import { APIKey } from "../config.js";
+import Button from "@material-ui/core/Button";
+//import NavigationIcon from "@material-ui/icons/Navigation";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import MovieCard from "./MovieCard";
+import ViewToggler from "./ViewToggler";
+
 // import NewWrappedMap from './NewMovieMap';
 // import { APIKey } from '../config.js';
 // import Button from '@material-ui/core/Button';
@@ -54,6 +64,7 @@ const useStyles = (theme) => ({
     width: "20ch",
   },
 });
+
 
 class SearchMovie extends Component {
   state = {
@@ -139,7 +150,27 @@ class SearchMovie extends Component {
   };
 
   render() {
-// <<<<<<< Dashboard
+
+    return (
+      <>
+        <Typography variant="body2" color="text" align="center">
+          <form onSubmit={this.handleSubmit}>
+            <TextField
+              id="movie-search"
+              label="Search for a movie"
+              variant="outlined"
+              onChange={this.handleChange}
+            />
+            <Button variant="contained" id="movie-search">
+              {/* <NavigationIcon /> */}
+              Find
+            </Button>
+            {this.state.movieId && (
+              <button onClick={this.handleClick}>View Movie Info</button>
+            )}
+          </form>
+        </Typography>
+
 //     const { classes } = this.props;
 
 //     return (
@@ -168,7 +199,7 @@ class SearchMovie extends Component {
 //             </form>
 //           </div>
 //         </Container>
-// =======
+
 //     // if (this.state.error)
 //     //   return <p>Oops something's gone wrong. Please try again.</p>;
 
@@ -203,7 +234,8 @@ class SearchMovie extends Component {
 //         {this.state.error && (
 //           <p>There has been an error finding your film, please try again</p>
 //         )}
-// >>>>>>> dev
+
+
         <>
           <br />
         </>
