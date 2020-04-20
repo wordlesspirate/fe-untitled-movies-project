@@ -18,6 +18,7 @@ export const getMovieId = (movieTitle) => {
     })
     .catch((err) => {
       console.log(err);
+      return err;
     });
 };
 
@@ -42,7 +43,7 @@ export const getMovieLocations = (movieId) => {
       return addressArray;
     })
     .catch((err) => {
-      console.log(err);
+      return err;
     });
 };
 
@@ -76,7 +77,7 @@ export const getMovieLocationsInfo = (movieId) => {
       return locationInfo;
     })
     .catch((err) => {
-      console.log(err);
+      return err;
     });
 };
 

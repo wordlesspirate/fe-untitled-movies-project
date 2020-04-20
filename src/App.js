@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import "./App.css";
-import Dashboard from "./Components/Dashboard";
-import Home from "./Components/Home";
-import Register from "./Components/Register";
-import Login from "./Components/Login";
-import Gallery from "./Components/Gallery";
-import Usercamera from "./Components/Usercamera";
-import Genres from "./Components/Genres";
-import Profile from "./Components/Profile";
-import Navbar from "./Components/Navbar";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import React, { Component } from 'react';
+import './App.css';
+import Dashboard from './Components/Dashboard';
+import Home from './Components/Home';
+import Register from './Components/Register';
+import Login from './Components/Login';
+import Gallery from './Components/Gallery';
+import Usercamera from './Components/Usercamera';
+import Genres from './Components/Genres';
+import Profile from './Components/Profile';
+import Navbar from './Components/Navbar';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
 class App extends Component {
   state = {
@@ -62,13 +62,18 @@ class App extends Component {
 
     return (
       !this.state.isAuthenticating && (
-        <div className={"App"}>
+        <div className={'App'}>
           <Router>
             <div>
+
               {this.state.isNavBarHidden === true ? null : (
                 <Navbar auth={authProps} />
               )}
 
+
+      //check this bit
+              <Navbar auth={authProps} />
+ //this bit above
               <Switch primary={false}>
                 <Route
                   exact

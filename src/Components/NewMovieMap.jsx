@@ -1,15 +1,21 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
   Marker,
   InfoWindow,
-} from "react-google-maps";
-import UserLocation from "./UserLocation";
-import * as api from "../Utils/api";
+} from 'react-google-maps';
+import UserLocation from './UserLocation';
+import * as api from '../Utils/api';
 class NewMovieMap extends Component {
-  state = { coordinate: null, address: null, destination: null, stops: [] };
+  state = {
+    coordinate: null,
+    address: null,
+    destination: null,
+    stops: [],
+    isLoading: false,
+  };
 
   fetchAddress = (coordinate) => {
     api.getAddress(coordinate).then((address) => {
@@ -45,11 +51,15 @@ class NewMovieMap extends Component {
     });
   };
   componentDidMount() {
+    //this.setState({isLoading:true})
     this.displayMarkers();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.coordinates !== prevProps.coordinates) this.displayMarkers();
+    if (this.props.coordinates !== prevProps.coordinates) {
+      // this.setState({isLoading:true})
+      this.displayMarkers();
+    }
   }
 
   render() {
@@ -86,6 +96,7 @@ class NewMovieMap extends Component {
           coordinates={this.props.coordinates}
           destination={this.state.destination}
           stops={this.state.stops}
+          movieInfo={this.props.movieInfo}
         />
       </div>
     );
