@@ -10,7 +10,7 @@ import * as api from "../Utils/api";
 import NewWrappedMap from "./NewMovieMap";
 import { APIKey } from "../config.js";
 import Button from "@material-ui/core/Button";
-import NavigationIcon from "@material-ui/icons/Navigation";
+//import NavigationIcon from "@material-ui/icons/Navigation";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import MovieCard from "./MovieCard";
@@ -73,7 +73,7 @@ class SearchMovie extends Component {
               onChange={this.handleChange}
             />
             <Button variant="contained" id="movie-search">
-              <NavigationIcon />
+              {/* <NavigationIcon /> */}
               Find
             </Button>
             {this.state.movieId && (

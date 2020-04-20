@@ -1,12 +1,9 @@
 import React from "react";
 import axios from "axios";
 import config from "../config.json";
-
-import { Link } from "@reach/router";
 import Avatar from "@material-ui/core/Avatar";
 
 import ErrorHandler from "./ErrorHandler";
-
 
 import "../App.css";
 

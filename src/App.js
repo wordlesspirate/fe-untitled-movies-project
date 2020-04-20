@@ -16,10 +16,15 @@ class App extends Component {
   state = {
     isAuthenticated: false,
     isAuthenticating: true,
+    isNavBarHidden: true,
     user: null,
     movieId: null,
   };
 
+  hideNav = (bool) => {
+    console.log(bool);
+    this.setState({ isNavBarHidden: bool });
+  };
   setAuthStatus = (authenticated) => {
     this.setState({ isAuthenticated: authenticated });
   };
@@ -49,6 +54,8 @@ class App extends Component {
     const authProps = {
       isAuthenticated: this.state.isAuthenticated,
       user: this.state.user,
+      isNavBarHidden: this.state.isNavBarHidden,
+      hideNav: this.hideNav,
       setAuthenticated: this.setAuthStatus,
       userInfo: this.setUser,
     };
@@ -58,8 +65,11 @@ class App extends Component {
         <div className={"App"}>
           <Router>
             <div>
-              <Navbar auth={authProps} />
-              <Switch>
+              {this.state.isNavBarHidden === true ? null : (
+                <Navbar auth={authProps} />
+              )}
+
+              <Switch primary={false}>
                 <Route
                   exact
                   path="/"

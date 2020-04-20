@@ -11,6 +11,7 @@ class Navbar extends Component {
       this.props.auth.setAuthenticated(false);
       this.props.auth.userInfo(null);
       history.push("/");
+      this.props.hideNav(true);
     } catch (error) {
       console.dir(error);
       console.log(error);
@@ -27,11 +28,9 @@ class Navbar extends Component {
           <a href="/userCamera">Camera</a>
           <a href="/gallery">Gallery</a>
           <a href="/profile">My Profile</a>
-          {this.props.auth.isAuthenticated ? (
-            <a href="/" onClick={this.handleLogOut}>
-              Log out
-            </a>
-          ) : null}
+          <a href="/" onClick={this.handleLogOut}>
+            Log out
+          </a>
         </div>
       </nav>
     );
