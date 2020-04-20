@@ -32,8 +32,8 @@ const useStyles = (theme) => ({
     alignItems: "center",
   },
   large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
+    width: theme.spacing(6),
+    height: theme.spacing(6),
   },
   account: {
     marginTop: theme.spacing(4),
@@ -53,11 +53,12 @@ const useStyles = (theme) => ({
     height: "100%",
     display: "flex",
     flexDirection: "column",
+    maxWidth: 322,
   },
-  cardMedia: {
-    // paddingTop: "56.25%",
-    // height: "50%",
-    // width: "50%",
+  media: {
+    width: 322,
+    height: 322,
+    objectFit: "contain",
   },
   cardContent: {
     flexGrow: 1,
@@ -138,7 +139,7 @@ class Profile extends React.Component {
         </AppBar>
         <main>
           <div className={classes.heroContent}>
-            <Container maxWidth="sm">
+            <Container maxWidth="xs">
               <Typography
                 component="h4"
                 variant="h4"
@@ -172,12 +173,12 @@ class Profile extends React.Component {
             >
               Favorite Genres
             </Typography>
-            <Grid container spacing={4} alignItems="center">
+            <Grid container spacing={4}>
               {cards.map((card, index) => (
                 <Grid item key={index} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardMedia
-                      className={classes.cardMedia}
+                      className={classes.media}
                       component="img"
                       alt=""
                       image={card.image}
