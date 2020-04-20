@@ -6,15 +6,54 @@ import {
 } from '../Utils/movies';
 import * as api from '../Utils/api';
 // import DisplayMarkers from "./DisplayMarkers";
+// <<<<<<< Dashboard
+// import NewWrappedMap from "./NewMovieMap";
+// import { APIKey } from "../config.js";
+// // import Button from "@material-ui/core/Button";
+// import { Container } from "@material-ui/core/";
+// import TextField from "@material-ui/core/TextField";
+// // import Typography from "@material-ui/core/Typography";
+// import MovieCard from "./MovieCard";
+// import ViewToggler from "./ViewToggler";
+// =======
 
-import NewWrappedMap from './NewMovieMap';
-import { APIKey } from '../config.js';
-import Button from '@material-ui/core/Button';
-// import NavigationIcon from "@material-ui/icons/Navigation";
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import MovieCard from './MovieCard';
-import ViewToggler from './ViewToggler';
+// import NewWrappedMap from './NewMovieMap';
+// import { APIKey } from '../config.js';
+// import Button from '@material-ui/core/Button';
+// // import NavigationIcon from "@material-ui/icons/Navigation";
+// import TextField from '@material-ui/core/TextField';
+// import Typography from '@material-ui/core/Typography';
+// import MovieCard from './MovieCard';
+// import ViewToggler from './ViewToggler';
+// >>>>>>> dev
+
+// fix button
+
+import { withStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
+import NavigationIcon from "@material-ui/icons/Navigation";
+
+const useStyles = (theme) => ({
+  background: {
+    backgroundColor: theme.background.option1.lightBlue,
+  },
+
+  root: {
+    "& > *": {
+      margin: theme.spacing(2),
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+    },
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(2),
+  },
+  searchBox: {
+    margin: theme.spacing(1),
+    width: "20ch",
+  },
+});
 
 class SearchMovie extends Component {
   state = {
@@ -49,72 +88,122 @@ class SearchMovie extends Component {
     } else {
       this.setState({ isLoading: true, fieldError: false, error: false });
 
-      getMovieId(this.state.movieTitle)
-        .then((movieId) => {
-          this.setState({ movieId });
-          getMovieLocations(movieId)
-            .then((addresses) => {
-              return Promise.all(
-                addresses.map((address) => api.getLatLng(address))
-              )
-                .then((coords) => {
-                  this.setState({ coordinates: coords, isLoading: false });
-                })
-                .catch((error) => {
-                  this.setState({ error }, () => {
-                    console.log(this.state.error);
-                  });
-                });
-            })
-            .catch((error) => {
-              this.setState({ error }, () => {
-                console.log(this.state.error);
-              });
-            });
-        })
-        .catch((error) => {
-          this.setState({ error }, () => {
-            console.log(this.state.error);
-          });
+// <<<<<<< Dashboard
+//     getMovieId(this.state.movieTitle).then((movieId) => {
+//       this.setState({ movieId });
+//       getMovieLocations(movieId).then((addresses) => {
+//         // need a promise all,
+//         // should resolve when you have all the api data
+//         // THEN you can set state
+
+//         return Promise.all(
+//           addresses.map((address) => api.getLatLng(address))
+//         ).then((coords) => {
+//           this.setState(
+//             { coordinates: coords }
+//             // , () => {
+//             // console.log(this.state.movieId);
+//             // }
+//           );
+// =======
+//       getMovieId(this.state.movieTitle)
+//         .then((movieId) => {
+//           this.setState({ movieId });
+//           getMovieLocations(movieId)
+//             .then((addresses) => {
+//               return Promise.all(
+//                 addresses.map((address) => api.getLatLng(address))
+//               )
+//                 .then((coords) => {
+//                   this.setState({ coordinates: coords, isLoading: false });
+//                 })
+//                 .catch((error) => {
+//                   this.setState({ error }, () => {
+//                     console.log(this.state.error);
+//                   });
+//                 });
+//             })
+//             .catch((error) => {
+//               this.setState({ error }, () => {
+//                 console.log(this.state.error);
+//               });
+//             });
+//         })
+//         .catch((error) => {
+//           this.setState({ error }, () => {
+//             console.log(this.state.error);
+//           });
+// >>>>>>> dev
         });
     }
   };
 
   render() {
-    // if (this.state.error)
-    //   return <p>Oops something's gone wrong. Please try again.</p>;
+// <<<<<<< Dashboard
+//     const { classes } = this.props;
 
-    return (
-      <>
-        <Typography variant="body2" color="text" align="center">
-          <form onSubmit={this.handleSubmit} required={true}>
-            <TextField
-              id="movie-search"
-              label="Search for a movie"
-              variant="outlined"
-              onChange={this.handleChange}
-              required={true}
-              error={this.state.fieldError}
-            />
-            <Button
-              variant="contained"
-              id="movie-search"
-              onClick={this.handleSubmit}
-            >
-              {/* <NavigationIcon /> */}
-              Find
-            </Button>
-            {this.state.movieId && !this.state.error && (
-              <button onClick={this.handleClick}>View Movie Info</button>
-            )}
-          </form>
-        </Typography>
-        {this.state.isLoading && !this.state.error && (
-          <p>Please wait while your film locations load</p>
-        )}
-        {this.state.error && (
-          <p>There has been an error finding your film, please try again</p>
-        )}
+//     return (
+//       <>
+//         <Container component="main" maxWidth="xs">
+//           <div className={classes.root}>
+//             <form onSubmit={this.handleSubmit}>
+//               <TextField
+//                 className={classes.searchBox}
+//                 id="movie-search"
+//                 label="Search for a movie"
+//                 variant="outlined"
+//                 onChange={this.handleChange}
+//               />
+//               <Fab variant="extended" id="movie-search">
+//                 <NavigationIcon className={classes.extendedIcon} />
+//                 Submit
+//               </Fab>
+//               {/* <Button variant="contained" id="movie-search">
+//             <NavigationIcon />
+//             Find
+//           </Button> */}
+//               {this.state.movieId && (
+//                 <button onClick={this.handleClick}>View Movie Info</button>
+//               )}
+//             </form>
+//           </div>
+//         </Container>
+// =======
+//     // if (this.state.error)
+//     //   return <p>Oops something's gone wrong. Please try again.</p>;
+
+//     return (
+//       <>
+//         <Typography variant="body2" color="text" align="center">
+//           <form onSubmit={this.handleSubmit} required={true}>
+//             <TextField
+//               id="movie-search"
+//               label="Search for a movie"
+//               variant="outlined"
+//               onChange={this.handleChange}
+//               required={true}
+//               error={this.state.fieldError}
+//             />
+//             <Button
+//               variant="contained"
+//               id="movie-search"
+//               onClick={this.handleSubmit}
+//             >
+//               {/* <NavigationIcon /> */}
+//               Find
+//             </Button>
+//             {this.state.movieId && !this.state.error && (
+//               <button onClick={this.handleClick}>View Movie Info</button>
+//             )}
+//           </form>
+//         </Typography>
+//         {this.state.isLoading && !this.state.error && (
+//           <p>Please wait while your film locations load</p>
+//         )}
+//         {this.state.error && (
+//           <p>There has been an error finding your film, please try again</p>
+//         )}
+// >>>>>>> dev
         <>
           <br />
         </>
@@ -156,7 +245,7 @@ class SearchMovie extends Component {
   }
 }
 
-export default SearchMovie;
+export default withStyles(useStyles)(SearchMovie);
 
 // { lat: 55.378051, lng: -3.435973 },
 //       { lat: 56.49067119999999, lng: -4.2026458 },
