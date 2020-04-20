@@ -79,6 +79,7 @@ class Login extends React.Component {
       const user = await Auth.signIn(this.state.username, this.state.password);
       this.props.auth.setAuthenticated(true);
       this.props.auth.userInfo(user);
+      this.props.auth.hideNav(false);
       this.props.history.push("/home");
     } catch (error) {
       let err = null;
@@ -98,14 +99,24 @@ class Login extends React.Component {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
+          <ErrorHandler formerrors={this.state.errors} />
           <Avatar className={classes.avatar}></Avatar>
           <form
             className={classes.form}
             onSubmit={this.handleSubmit}
             noValidate
           >
+
             <ErrorHandler formerrors={this.state.errors} />
+
+
+        //which is needed?
+            <Typography component="h6" variant="h2">
+
+            {/* <ErrorHandler formerrors={this.state.errors} /> */}           //this one? -->
+
             <Typography color="primary" component="h6" variant="h2">
+
               Sign in ...
             </Typography>
             <TextField
@@ -153,7 +164,7 @@ class Login extends React.Component {
               </Button>
             </Grid>
             <Grid item className={classes.account}>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import "./App.css";
 import Dashboard from "./Components/Dashboard";
@@ -13,14 +14,20 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Auth } from "aws-amplify";
 import ViewToggler from "./Components/ViewToggler";
 
+
 class App extends Component {
   state = {
     isAuthenticated: false,
     isAuthenticating: true,
+    isNavBarHidden: true,
     user: null,
     movieId: null,
   };
 
+  hideNav = (bool) => {
+    console.log(bool);
+    this.setState({ isNavBarHidden: bool });
+  };
   setAuthStatus = (authenticated) => {
     this.setState({ isAuthenticated: authenticated });
   };
@@ -50,20 +57,39 @@ class App extends Component {
     const authProps = {
       isAuthenticated: this.state.isAuthenticated,
       user: this.state.user,
+      isNavBarHidden: this.state.isNavBarHidden,
+      hideNav: this.hideNav,
       setAuthenticated: this.setAuthStatus,
       userInfo: this.setUser,
     };
 
     return (
       !this.state.isAuthenticating && (
-        <div className={"App"}>
+        <div className={'App'}>
           <Router>
             <div>
+
+
+        //three bits the same:
+              {this.state.isNavBarHidden === true ? null : (
+                <Navbar auth={authProps} />
+              )}
+
+
+      // this bit
+              <Navbar auth={authProps} />
+ 
+
+      //not sure which is needed?
               <ViewToggler>
                 <Navbar auth={authProps} />
               </ViewToggler>
-              <Switch>
-                <Route
+            
+
+             
+
+              <Switch primary={false}>
+    <Route
                   exact
                   path="/"
                   render={(props) => <Login {...props} auth={authProps} />}

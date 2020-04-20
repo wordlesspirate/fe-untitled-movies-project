@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 import MenuOutlinedIcon from "@material-ui/icons/MenuOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 class ViewToggler extends Component {
-  state = { isVisible: true };
+  state = { isVisible: false };
 
   handleClick = (event) => {
     this.setState((currentState) => {

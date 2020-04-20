@@ -153,7 +153,15 @@ class Register extends React.Component {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
+
+        //repeated code
+        // >>>
+          <ErrorHandler formerrors={this.state.errors} />
+          <Typography component="h6" variant="h2">
+
           <Typography color="primary" component="h6" variant="h2">
+          //<<<<
+
             Sign up
           </Typography>
           <form onSubmit={this.handleSubmit} className={classes.form}>
@@ -240,8 +248,6 @@ class Register extends React.Component {
           </form>
         </div>
       </Container>
-
-      // <ErrorHandler formerrors={this.state.errors} />
     );
   }
 }

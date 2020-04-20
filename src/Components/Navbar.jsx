@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import { BrowserRouter as useHistory } from "react-router-dom";
@@ -49,7 +50,14 @@ class Navbar extends Component {
       Auth.signOut();
       this.props.auth.setAuthenticated(false);
       this.props.auth.userInfo(null);
+
       history.push("/");
+      this.props.hideNav(true);
+
+        //below bit?
+      history.push('/');
+        //above?
+
     } catch (error) {
       console.dir(error);
       console.log(error);

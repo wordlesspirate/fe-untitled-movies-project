@@ -1,18 +1,21 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   // GoogleMap,
   // Marker,
   // DirectionsService,
   DirectionsRenderer,
   // LatLng,
-} from "react-google-maps";
-// import APIKey from "../config";
+} from 'react-google-maps';
+import ViewToggler from './ViewToggler';
+import MovieCard from './MovieCard';
+import ViewTogglerDirections from './ViewTogglerDirections';
 
 class RouteCalculator extends Component {
   state = {
     userLocation: null,
     directions: null,
-    textDirections: false,
+    textDirections: true,
+    movieInfo: null,
   };
 
   // panelUpdate = () => {}
@@ -24,7 +27,9 @@ class RouteCalculator extends Component {
     if (this.props.userLocation !== this.state.userLocation) {
       this.setState({ userLocation: this.props.userLocation });
     }
-
+    if (this.props.movieInfo !== this.state.movieInfo) {
+      this.setState({ movieInfo: this.props.movieInfo });
+    }
     if (
       this.props.destination !== prevProps.destination ||
       this.props.stops !== prevProps.stops
@@ -54,23 +59,20 @@ class RouteCalculator extends Component {
               location: new window.google.maps.LatLng(stop.lat, stop.lng),
             };
           }),
-          travelMode: "DRIVING",
+          travelMode: 'DRIVING',
           optimizeWaypoints: true,
         },
         (result, status) => {
           // console.log("this is steps", result.routes[0].legs[0].steps);
 
           if (status === window.google.maps.DirectionsStatus.OK) {
-            this.setState(
-              {
-                directions: { ...result },
-                textDirections: true,
-                // polyline: result.routes[0].overview_polyline,
-              }
-             
-            );
+            this.setState({
+              directions: { ...result },
+              textDirections: true,
+              // polyline: result.routes[0].overview_polyline,
+            });
           } else {
-            console.dir("console.dir", result);
+            console.dir('console.dir', result);
           }
         }
       );
@@ -83,12 +85,19 @@ class RouteCalculator extends Component {
         {this.state.directions && (
           <DirectionsRenderer
             defaultDirections={this.state.directions}
-            panel={document.getElementById("panel")}
+            panel={document.getElementById('panel')}
           />
         )}
+        <ViewTogglerDirections>
+          {this.state.textDirections && <div id="panel"></div>}
+        </ViewTogglerDirections>
 
-        <div id="panel">Text directions</div>
-
+        <ViewToggler>
+          {this.state.movieInfo &&
+            this.state.movieInfo.map((info) => {
+              return <MovieCard key={info.movieLocation} {...info} />;
+            })}
+        </ViewToggler>
       </div>
     );
   }
