@@ -10,11 +10,10 @@ import Button from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
+
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
 
 const useStyles = (theme) => ({
   root: {
@@ -72,7 +71,7 @@ class Genres extends React.Component {
   state = {
     genres: [],
     username: this.props.auth.user.username,
-
+    message: "",
     num: 1,
     genre1: "",
     g1_avatar: "",
@@ -117,7 +116,6 @@ class Genres extends React.Component {
       }
 
       if (num === 3) {
-        console.log(num, "num in this");
         this.setState({ genre3: genre, g3_avatar: avatar, num: 4 });
       }
     }
@@ -126,9 +124,10 @@ class Genres extends React.Component {
   saveGenres = () => {
     const { genre1, genre2, genre3 } = this.state;
     if (genre1 === "" || genre2 === "" || genre3 === "") {
+      this.setState({ message: "Select Another Movie" });
     } else {
       this.updateProfile();
-      console.log(this.state.genre1, this.state.genre2, this.state.genre3);
+
       this.setState({
         num: 1,
         genre1: "",
@@ -190,23 +189,11 @@ class Genres extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const cards = this.state.genres;
-    console.log("are they all listed", cards);
-
     return (
       <>
         <CssBaseline />
-        <AppBar position="relative">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Navbar goes here
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <ErrorHandler
-          apierrors={this.state.error}
-          success={this.state.success}
-        />
+        <AppBar position="relative"></AppBar>
+
         <main>
           <Container className={classes.cardGrid} spacing={2}>
             <Typography
@@ -217,6 +204,12 @@ class Genres extends React.Component {
               gutterBottom
             >
               Pick your favourites
+              {/* // this is here to display changes saved and error message under title */}
+              {this.state.message}
+              <ErrorHandler
+                apierrors={this.state.error}
+                success={this.state.success}
+              />
             </Typography>
 
             <Grid
@@ -235,6 +228,7 @@ class Genres extends React.Component {
                           component="img"
                           alt=""
                           image={g_avatar}
+                          name={genre}
                           title=""
                         />
                         <CardContent className={classes.cardContent}>
@@ -251,8 +245,8 @@ class Genres extends React.Component {
                   </Grid>
                 );
               })}
-              <button onClick={this.saveGenres}>Save</button>
             </Grid>
+            <button onClick={this.saveGenres}>Save</button>
           </Container>
         </main>
       </>

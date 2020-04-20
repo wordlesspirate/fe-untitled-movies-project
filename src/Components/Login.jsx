@@ -80,7 +80,7 @@ class Login extends React.Component {
       this.props.auth.setAuthenticated(true);
       this.props.auth.userInfo(user);
       this.props.auth.hideNav(false);
-      this.props.history.push("/home");
+      this.props.history.push("/profile");
     } catch (error) {
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);
