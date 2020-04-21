@@ -1,23 +1,11 @@
 import React from "react";
 import axios from "axios";
 import config from "../config.json";
-import Avatar from "@material-ui/core/Avatar";
 import ErrorHandler from "./ErrorHandler";
-
+import typeface from "typeface-roboto";
 import "../App.css";
-// Remove below import?
-// import { Link } from "@reach/router";
-// Import for basic profile
-// import TextField from "@material-ui/core/TextField";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Checkbox from "@material-ui/core/Checkbox";
-import AppBar from "@material-ui/core/AppBar";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
+import { Grid, Divider } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -32,29 +20,19 @@ const useStyles = (theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  large: {
-    width: theme.spacing(6),
-    height: theme.spacing(6),
-  },
-  account: {
-    marginTop: theme.spacing(4),
+  favourite: {
+    margin: theme.spacing(1),
     display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    color: "white",
+    align: "center",
+    fontSize: "1.2em",
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
-  },
-  cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
-  },
-  card: {
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    maxWidth: 322,
+    background: "linear-gradient(30deg, #A8D0DB 30%, #5E548E 95%)",
+    //backgroundColor: "#E6DBD0",
+    padding: theme.spacing(4, 0, 3),
   },
   media: {
     width: 322,
@@ -63,6 +41,55 @@ const useStyles = (theme) => ({
   },
   cardContent: {
     flexGrow: 1,
+  },
+  genreImage: {
+    margin: theme.spacing(2),
+    width: "80px",
+    height: "120px",
+    borderRadius: "10px",
+    boxShadow: " 2px 3px 5px black",
+  },
+  mainbg: {
+    background: "linear-gradient(30deg, #A8D0DB 30%, #5E548E 95%)",
+    // background: "linear-gradient(45deg, #5E548E 30%, #FF8E53 90%)",
+    color: "white",
+  },
+  badges: {
+    backgroundColor: "#A8D0DB",
+    height: "100vh",
+  },
+  badgeItems: {
+    borderTop: "1px solid #747C92",
+    height: "60px",
+    display: "flex",
+    flexDirection: "row",
+    padding: "3px",
+    backgroundColor: "#f3EDE2",
+  },
+  badge: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  visitInfo: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "black",
+  },
+  avatarInfo: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  rank: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+  badgeArea: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 
@@ -130,80 +157,113 @@ class Profile extends React.Component {
     return (
       <>
         <ErrorHandler apierrors={this.state.error} />
-        <CssBaseline />
-        <AppBar position="relative">
-          <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-              Navbar goes here
-            </Typography>
-          </Toolbar>
-        </AppBar>
+
         <main>
-          <div className={classes.heroContent}>
-            <Container maxWidth="xs">
-              <Typography
-                component="h4"
-                variant="h4"
-                align="center"
-                color="textSecondary"
-                gutterBottom
+          <div className={classes.mainbg}>
+            <div className={classes.heroContent}>
+              <Container maxWidth="xs">
+                <Typography
+                  component="h4"
+                  variant="h4"
+                  align="center"
+                  gutterBottom
+                >
+                  <div style={{ textAlign: "center", fontSize: "1.5em" }}>
+                    {`Hello ${this.state.username}`}{" "}
+                  </div>
+                </Typography>
+                <Grid className={classes.avatarInfo} maxWidth="xs">
+                  <Grid item xs={5}>
+                    <div className={classes.root}>
+                      <img
+                        style={{
+                          width: "120px",
+                          height: "120px",
+                        }}
+                        src={require("./starw.png")}
+                      />
+                    </div>
+                  </Grid>
+                  <Grid className={classes.rank} item xs={6}>
+                    <div style={{ textAlign: "center", fontSize: "1.5em" }}>
+                      Current ranking:
+                    </div>
+                    <div className={classes.badgeArea}>
+                      <div className={classes.root}>
+                        <img
+                          style={{ width: "60px", height: "80px" }}
+                          src={require("./currentRank.svg")}
+                        />
+                      </div>
+                      <div style={{ textAlign: "center", fontSize: "5em" }}>
+                        67
+                      </div>
+                    </div>
+                  </Grid>
+                </Grid>
+              </Container>
+            </div>
+
+            <Container component="main" maxWidth="xs">
+              <Grid
+                className={classes.sectionheader}
+                color="primary"
+                item
+                xs={12}
               >
-                {`Hello, ${this.state.username}`}
-              </Typography>
-              <div className={classes.root}>
-                <Avatar
-                  alt={this.state.username}
-                  src={this.state.profile.avatar_url}
-                  className={classes.large}
-                />
-              </div>
-              <Grid item className={classes.account}>
-                <Link href="#" variant="body2">
-                  {"Edit Avatar"}
-                </Link>
+                <Divider />
+                <Typography className={classes.favourite} component="h6">
+                  Favourite Films
+                </Typography>
+              </Grid>
+              <Grid container xs={12}>
+                {cards.map((card, index) => {
+                  return (
+                    <Grid item xs={4}>
+                      <img className={classes.genreImage} src={card.image} />
+                    </Grid>
+                  );
+                })}
               </Grid>
             </Container>
-          </div>
-          <Container className={classes.cardGrid} spacing={2}>
-            <Typography
-              component="h4"
-              variant="h4"
-              align="center"
-              color="textSecondary"
-              gutterBottom
-            >
-              Favorite Genres
-            </Typography>
-            <Grid container spacing={4}>
-              {cards.map((card, index) => (
-                <Grid item key={index} xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.media}
-                      component="img"
-                      alt=""
-                      image={card.image}
-                      title=""
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography
-                        gutterBottom
-                        variant="subtitle2"
-                        align="justify"
-                      >
-                        {card.genre}
-                      </Typography>
-                    </CardContent>
-                  </Card>
+            <div className={classes.badges}>
+              <Grid className={classes.badgeItems} container xs={12}>
+                <Grid className={classes.badge} xs={3}>
+                  <img width="40px" src={require("./popcom.png")} />
                 </Grid>
-              ))}
-            </Grid>
-            <Grid item className={classes.account}>
-              <Link href="/profile/genres" variant="body2">
-                {"Edit Genres"}
-              </Link>
-            </Grid>
-          </Container>
+                <Grid className={classes.visitInfo} xs={7}>
+                  First person to get here!
+                </Grid>
+              </Grid>
+
+              <Grid className={classes.badgeItems} container xs={12}>
+                <Grid className={classes.badge} xs={3}>
+                  <img width="40px" src={require("./jv.png")} />
+                </Grid>
+                <Grid className={classes.visitInfo} xs={7}>
+                  Visited a Horror location!
+                </Grid>
+              </Grid>
+
+              <Grid className={classes.badgeItems} container xs={12}>
+                <Grid className={classes.badge} xs={3}>
+                  <img width="40px" src={require("./aircraft-engine.png")} />
+                </Grid>
+                <Grid className={classes.visitInfo} xs={7}>
+                  Visted over 40 locations
+                </Grid>
+              </Grid>
+
+              <Grid className={classes.badgeItems} container xs={12}>
+                <Grid className={classes.badge} xs={3}>
+                  <img width="40px" src={require("./icon1.ico")} />
+                </Grid>
+                <Grid className={classes.visitInfo} xs={7}>
+                  Visited most of something
+                </Grid>
+              </Grid>
+            </div>
+          </div>
         </main>
       </>
     );

@@ -66,10 +66,6 @@ class App extends Component {
         <div className={"App"}>
           <Router>
             <div>
-              {/* {this.state.isNavBarHidden === true ? null : (
-                <Navbar auth={authProps} />
-              )} */}
-
               <ViewToggler>
                 <Navbar auth={authProps} />
               </ViewToggler>

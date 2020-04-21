@@ -3,6 +3,7 @@ import Camera, { FACING_MODES, IMAGE_TYPES } from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import ReactS3 from "react-s3";
 import keys from "../config.json";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 class Usercamera extends Component {
   state = {
@@ -39,6 +40,7 @@ class Usercamera extends Component {
   render() {
     return (
       <div>
+        <CssBaseline />
         <Camera
           onTakePhoto={(dataUri) => {
             this.handleTakePhoto(dataUri);

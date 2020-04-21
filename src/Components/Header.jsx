@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <Container component="header" maxWidth="lg">
       <CssBaseline />
-      <Typography variant="h2" color="textPrimary" align="center">
+      <Typography variant="h2" color="secondary" align="center">
         Movie Map
       </Typography>
     </Container>

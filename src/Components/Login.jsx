@@ -17,10 +17,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 const useStyles = (theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+
+    marginTop: theme.spacing(4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+
   },
   avatar: {
     margin: theme.spacing(1),
@@ -81,9 +83,7 @@ class Login extends React.Component {
       this.props.auth.userInfo(user);
       this.props.auth.hideNav(false);
 
-     // this.props.history.push("/profile");
-
-      this.props.history.push('/profile');
+      this.props.history.push("/profile");
 
     } catch (error) {
       let err = null;
@@ -104,15 +104,19 @@ class Login extends React.Component {
         <CssBaseline />
         <div className={classes.paper}>
           <ErrorHandler formerrors={this.state.errors} />
-          <Avatar className={classes.avatar}></Avatar>
+
+          <img
+            style={{ width: "150", height: "160px" }}
+            src={require("./map.png")}
+          />
           <form
             className={classes.form}
             onSubmit={this.handleSubmit}
             noValidate
           >
-            <ErrorHandler formerrors={this.state.errors} />
-            <ErrorHandler formerrors={this.state.errors} />
-            <Typography color="primary" component="h6" variant="h2">
+         
+            
+            <Typography color="secondary" component="h6" variant="h2">
               Sign in ...
             </Typography>
             <TextField

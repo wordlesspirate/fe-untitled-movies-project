@@ -144,6 +144,15 @@ class SearchMovie extends Component {
           )}
         </Typography>
 
+
+        {this.state.isLoading && !this.state.error && (
+          <p>Please wait, I'll be back...</p>
+        )}
+        {this.state.error && (
+          <p>Houston, we have a problem. Please try again...</p>
+        )}
+
+
         <div
           style={{
             width: '100%',

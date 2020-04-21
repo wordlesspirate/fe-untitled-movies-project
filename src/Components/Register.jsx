@@ -117,7 +117,6 @@ class Register extends React.Component {
   };
 
   handleSubmit = async (event) => {
-    console.log("IM FURRNING THIS IT");
     event.preventDefault();
     this.clearErrorState();
     const { username, email, password, name } = this.state;
@@ -156,7 +155,7 @@ class Register extends React.Component {
         <div className={classes.paper}>
           <ErrorHandler formerrors={this.state.errors} />
 
-          <Typography color="primary" component="h6" variant="h2">
+          <Typography color="secondary" component="h6" variant="h2">
             Sign up ...
           </Typography>
           <form onSubmit={this.handleSubmit} className={classes.form}>

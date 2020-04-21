@@ -67,12 +67,12 @@ class Gallery extends Component {
     // if (this.state.userPics == "") return "You have not snapped any shots!";
     if (!this.state.isLoading) {
       return (
-        <Container component="main" maxWidth="xs">
+        <Container className={classes.bg} component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
             <Grid container spacing={1}>
               <Grid item xs={12}>
-                <Typography color="primary" component="h6" variant="h2">
+                <Typography color="secondary" component="h6" variant="h2">
                   Gallery
                 </Typography>
               </Grid>
