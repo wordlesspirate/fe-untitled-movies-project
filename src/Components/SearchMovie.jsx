@@ -165,10 +165,10 @@ class SearchMovie extends Component {
         </Typography>
 
         {this.state.isLoading && !this.state.error && (
-          <p>Please wait while your film locations load</p>
+          <p>Please wait, I'll be back...</p>
         )}
         {this.state.error && (
-          <p>There has been an error finding your film, please try again</p>
+          <p>Houston, we have a problem. Please try again...</p>
         )}
 
         <div

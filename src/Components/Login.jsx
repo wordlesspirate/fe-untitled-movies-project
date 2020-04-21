@@ -17,7 +17,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 const useStyles = (theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -80,7 +80,7 @@ class Login extends React.Component {
       this.props.auth.setAuthenticated(true);
       this.props.auth.userInfo(user);
       this.props.auth.hideNav(false);
-      this.props.history.push("/home");
+      this.props.history.push("/profile");
     } catch (error) {
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);
@@ -100,7 +100,11 @@ class Login extends React.Component {
         <CssBaseline />
         <div className={classes.paper}>
           <ErrorHandler formerrors={this.state.errors} />
-          <Avatar className={classes.avatar}></Avatar>
+
+          <img
+            style={{ width: "210px", height: "110px" }}
+            src={require("./covericon.png")}
+          />
           <form
             className={classes.form}
             onSubmit={this.handleSubmit}
@@ -108,7 +112,7 @@ class Login extends React.Component {
           >
             <ErrorHandler formerrors={this.state.errors} />
             <ErrorHandler formerrors={this.state.errors} />
-            <Typography color="primary" component="h6" variant="h2">
+            <Typography color="secondary" component="h6" variant="h2">
               Sign in ...
             </Typography>
             <TextField

@@ -43,13 +43,41 @@ class ImageCard extends Component {
       return (
         <div>
           <ErrorHandler apierrors={this.state.error} />
-          <SRLWrapper>
-            <img
-              alt={"user-img"}
-              src={`${image.src}`}
-              style={{ width: "100%" }}
-            />
-          </SRLWrapper>
+          <div
+            style={{
+              backgroundColor: "#E7E5DF",
+              padding: "5px",
+              borderRadius: "5px",
+            }}
+          >
+            <SRLWrapper style={{ borderRadius: "10px" }}>
+              <img src={`${image.src}`} style={{ width: "100%" }} />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  padding: "4px",
+                }}
+              >
+                <img
+                  alt={"share icon"}
+                  src={require("./share.png")}
+                  style={{ width: "15px" }}
+                />
+                <img
+                  alt={"share icon"}
+                  src={require("./instagram.png")}
+                  style={{ width: "15px" }}
+                />
+                <img
+                  alt={"share icon"}
+                  src={require("./whatsapp.png")}
+                  style={{ width: "15px" }}
+                />
+              </div>
+            </SRLWrapper>
+          </div>
         </div>
       );
     }

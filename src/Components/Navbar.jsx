@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Auth } from "aws-amplify";
 import { BrowserRouter as useHistory } from "react-router-dom";
 import "typeface-roboto";
-import { Link, Container } from "@material-ui/core";
+import { Link, Container, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 const useStyles = (theme) => ({
   paper: {
@@ -39,6 +39,13 @@ const useStyles = (theme) => ({
   input: {
     color: "white",
   },
+  menugrid: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    fontSize: "1.2em",
+    lineHeight: "1.5em",
+  },
 });
 
 class Navbar extends Component {
@@ -64,24 +71,23 @@ class Navbar extends Component {
     return (
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
-          <Link color="secondary" href="/home">
-            Home
-          </Link>
-          <Link color="secondary" href="/maps">
-            Map
-          </Link>
-          <Link color="secondary" href="/userCamera">
-            Camera
-          </Link>
-          <Link color="secondary" href="/gallery">
-            Gallery
-          </Link>
-          <Link color="secondary" href="/profile">
-            Profile
-          </Link>
-          <Link color="secondary" href="/" onClick={this.handleLogOut}>
-            Log Out
-          </Link>
+          <Grid className={classes.menugrid} item xs={12}>
+            <Link color="secondary" href="/maps">
+              Map
+            </Link>
+            <Link color="secondary" href="/userCamera">
+              Camera
+            </Link>
+            <Link color="secondary" href="/gallery">
+              Gallery
+            </Link>
+            <Link color="secondary" href="/profile">
+              Profile
+            </Link>
+            <Link color="secondary" href="/" onClick={this.handleLogOut}>
+              Log Out
+            </Link>
+          </Grid>
         </div>
       </Container>
     );
