@@ -1,8 +1,8 @@
-import React from "react";
-import { Auth } from "aws-amplify";
-import ErrorHandler from "./ErrorHandler";
+import React from 'react';
+import { Auth } from 'aws-amplify';
+import ErrorHandler from './ErrorHandler';
 
-import "typeface-roboto";
+import 'typeface-roboto';
 import {
   Button,
   Avatar,
@@ -11,16 +11,18 @@ import {
   Grid,
   Typography,
   Container,
-} from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
+} from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const useStyles = (theme) => ({
   paper: {
+
     marginTop: theme.spacing(4),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+
   },
   avatar: {
     margin: theme.spacing(1),
@@ -34,25 +36,25 @@ const useStyles = (theme) => ({
   },
   submitbutton: {
     marginTop: theme.spacing(2),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   account: {
     marginTop: theme.spacing(1),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
   },
 });
 
 class Login extends React.Component {
   state = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
     errors: {
       cognito: null,
     },
@@ -80,7 +82,9 @@ class Login extends React.Component {
       this.props.auth.setAuthenticated(true);
       this.props.auth.userInfo(user);
       this.props.auth.hideNav(false);
+
       this.props.history.push("/profile");
+
     } catch (error) {
       let err = null;
       !error.message ? (err = { message: error }) : (err = error);
@@ -110,8 +114,8 @@ class Login extends React.Component {
             onSubmit={this.handleSubmit}
             noValidate
           >
-            <ErrorHandler formerrors={this.state.errors} />
-            <ErrorHandler formerrors={this.state.errors} />
+         
+            
             <Typography color="secondary" component="h6" variant="h2">
               Sign in ...
             </Typography>
@@ -128,7 +132,7 @@ class Login extends React.Component {
               onChange={this.handleChange}
               fullWidth
               id="username"
-              label="username"
+              label="Username"
               autoComplete="email"
               autoFocus
             />
