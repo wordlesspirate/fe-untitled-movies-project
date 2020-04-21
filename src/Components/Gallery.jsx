@@ -44,7 +44,7 @@ class Gallery extends Component {
           Bucket: "movieapp-users-images",
           Prefix: userFolder,
         })
-        .promise()
+        //.promise()
         .then((data) => {
           this.setState({ userPics: data.Contents, isLoading: false });
         });
@@ -64,6 +64,7 @@ class Gallery extends Component {
   render() {
     const { classes } = this.props;
     if (this.state.isLoading) return "Loading ....";
+    // if (this.state.userPics == "") return "You have not snapped any shots!";
     if (!this.state.isLoading) {
       return (
         <Container component="main" maxWidth="xs">
@@ -75,9 +76,6 @@ class Gallery extends Component {
                   Gallery
                 </Typography>
               </Grid>
-              {this.state.userPics.length === 0
-                ? "You have not snapped any shots!"
-                : ""}
               <ErrorHandler apierrors={this.state.error} />
               {this.state.userPics.map((item) => {
                 return (
