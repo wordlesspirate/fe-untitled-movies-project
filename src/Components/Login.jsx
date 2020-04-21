@@ -102,8 +102,8 @@ class Login extends React.Component {
           <ErrorHandler formerrors={this.state.errors} />
 
           <img
-            style={{ width: "210px", height: "110px" }}
-            src={require("./covericon.png")}
+            style={{ width: "150", height: "160px" }}
+            src={require("./map.png")}
           />
           <form
             className={classes.form}

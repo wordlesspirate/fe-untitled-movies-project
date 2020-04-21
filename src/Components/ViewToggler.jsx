@@ -45,7 +45,7 @@ class ViewToggler extends Component {
                     width: "30px",
                     height: "30px",
                   }}
-                  src={require("./isolated-layout2.png")}
+                  src={require("./map.png")}
                 />
               </div>
               <div>
