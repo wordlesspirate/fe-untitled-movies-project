@@ -44,7 +44,7 @@ class Gallery extends Component {
           Bucket: "movieapp-users-images",
           Prefix: userFolder,
         })
-        //.promise()
+        .promise()
         .then((data) => {
           this.setState({ userPics: data.Contents, isLoading: false });
         });

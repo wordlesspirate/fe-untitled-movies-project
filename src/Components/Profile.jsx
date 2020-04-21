@@ -51,7 +51,7 @@ const useStyles = (theme) => ({
   },
   mainbg: {
     background: "linear-gradient(30deg, #A8D0DB 30%, #5E548E 95%)",
-    // background: "linear-gradient(45deg, #5E548E 30%, #FF8E53 90%)",
+
     color: "white",
   },
   badges: {

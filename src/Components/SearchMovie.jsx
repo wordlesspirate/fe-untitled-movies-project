@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   getMovieId,
   getMovieLocations,
   getMovieLocationsInfo,
-} from '../Utils/movies';
-import * as api from '../Utils/api';
-import NewWrappedMap from './NewMovieMap';
-import { APIKey } from '../config.js';
-import Button from '@material-ui/core/Button';
-import { Container } from '@material-ui/core/';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
+} from "../Utils/movies";
+import * as api from "../Utils/api";
+import NewWrappedMap from "./NewMovieMap";
+import { APIKey } from "../config.js";
+import Button from "@material-ui/core/Button";
+import { Container } from "@material-ui/core/";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
-import { withStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import { withStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
+import NavigationIcon from "@material-ui/icons/Navigation";
 
 const useStyles = (theme) => ({
   background: {
@@ -22,11 +22,11 @@ const useStyles = (theme) => ({
   },
 
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(2),
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
     },
   },
   extendedIcon: {
@@ -34,15 +34,15 @@ const useStyles = (theme) => ({
   },
   searchBox: {
     margin: theme.spacing(1),
-    width: '20ch',
+    width: "30ch",
   },
 });
 
 class SearchMovie extends Component {
   state = {
-    movieTitle: '',
+    movieTitle: "",
     coordinates: [],
-    movieId: '',
+    movieId: "",
     movieInfo: [],
     error: null,
     isLoading: false,
@@ -135,37 +135,28 @@ class SearchMovie extends Component {
                 View Movie Info
               </Button>
             )}
-          </form>{' '}
+          </form>{" "}
           {this.state.isLoading && !this.state.error && (
             <>Please wait while your film locations load</>
           )}
           {this.state.error && (
-            <>There has been an error finding your film, please try again</>
+            <>Houston, we have a problem. Please try again...</>
           )}
         </Typography>
 
-
-        {this.state.isLoading && !this.state.error && (
-          <p>Please wait, I'll be back...</p>
-        )}
-        {this.state.error && (
-          <p>Houston, we have a problem. Please try again...</p>
-        )}
-
-
         <div
           style={{
-            width: '100%',
-            height: '80vh',
-            justifyContent: 'center',
-            alignItems: 'center',
+            width: "100%",
+            height: "80vh",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <NewWrappedMap
             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${APIKey}`}
-            loadingElement={<div style={{ height: '100%' }} />}
-            containerElement={<div style={{ height: '100%' }} />}
-            mapElement={<div style={{ height: '100%' }} />}
+            loadingElement={<div style={{ height: "100%" }} />}
+            containerElement={<div style={{ height: "100%" }} />}
+            mapElement={<div style={{ height: "100%" }} />}
             coordinates={this.state.coordinates}
             movieInfo={this.state.movieInfo}
           />
